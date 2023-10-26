@@ -1,12 +1,4 @@
 import socket as s
-# Parâmetros universais para o código
-host = "127.0.0.1"  # IP do host utilizado
-port = 21           # Porta de acesso
-user = "ftpUser"    # Usuário utilizado para logar no Servidor
-senha = "12345"     # Senha do usuário
-
-# Constantes
-final = "\r\n"
 
 # Responsável por criar o socket 
 def criarSocket(host,port):   
@@ -54,9 +46,9 @@ def Login(socket, user, senha):
     comunicar(socket, password)      # Senha
 
 # Estabelece uma conexão com o servidor (com login) e configura
-def Conectar():
+def Conectar(Usuario, Senha):
     socket = criarSocket(host, port)
-    Login(socket, user, senha)
+    Login(socket, Usuario, Senha)
     comunicar(socket, "opts UTF8 ON\r\n")      # Configura o tipo de ASCII utilizado
     return socket
 
@@ -75,14 +67,27 @@ def caminhoDeDados(socket):
     receberMensagem(caminho)
     return caminho
 
+#Lista os objetos no caminho indicado
 def Listar(socket, path):
     caminho = caminhoDeDados(socket)
     mensagem = "list "+path+final
     mandarMensagem(socket, mensagem)
+    receberMensagem(socket)
     receberMensagem(caminho)
+    receberMensagem(socket)
+    caminho.close()
 
+############################################################################
+# Parâmetros universais para o código
+host = "127.0.0.1"  # IP do host utilizado
+port = 21           # Porta de acesso
+user = "ftpUser"    # Usuário utilizado para logar no Servidor
+senha = "12345"     # Senha do usuário
 
-socket = Conectar()
+# Constantes
+final = "\r\n"
+
+socket = Conectar(user, senha)
 while(True):
     entrada = input()
     if entrada == "Conectar":
