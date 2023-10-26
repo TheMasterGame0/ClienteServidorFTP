@@ -5,56 +5,95 @@ port = 21           # Porta de acesso
 user = "ftpUser"    # Usuário utilizado para logar no Servidor
 senha = "12345"     # Senha do usuário
 
-# Função responsável por criar o socket 
+# Constantes
+final = "\r\n"
+
+# Responsável por criar o socket 
 def criarSocket(host,port):   
-    socket = s.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socket = s.socket(s.AF_INET, s.SOCK_STREAM)
     endereco = (host, port) # Endereço IP e a porta do servidor
     socket.connect(endereco)
-    receive_msg(socket) 
+    receberMensagem(socket) 
     return socket
 
+# Fechar o socket
 def fecharSocket(socket):
     socket.close()
 
-def send_msg(socket, message):
+# Tenta enviar uma mensagem ao servidor
+def mandarMensagem(socket, mensagem):
     try:
         socket.settimeout(0.2)                 # Tempo do time out
-        socket.send(message.encode('utf-8'))   # Retorna o tamanho da mensagem enviada
-        receive_msg(socket)                    # Pega a mensagem recebida
+        socket.send(mensagem.encode('utf-8'))   # Retorna o tamanho da mensagem enviada
     except:
         print("Time out")
 
-def receive_msg(socket):
+# Tenta recebe as mensagens do servidor
+def receberMensagem(socket):
     TimeOut = False
     while not TimeOut:                          # Recebe so servidor até superar o limite de tempo
         try:
             socket.settimeout(0.2)             # Tempo do time out
             resposta = socket.recv(2048)
-            print(resposta.decode('utf-8'))
+            dados = resposta.decode('utf-8')
+            print(dados)
+            return dados
         except:
             TimeOut = True
 
+# Envia uma mensagem e obtêm as respostas 
+def comunicar(socket, mensagem):
+    mandarMensagem(socket,mensagem)
+    receberMensagem(socket)
+
+# Faz login no servidor
+def Login(socket, user, senha):
+    usuario = "user {u}\r\n".format(u = user)
+    comunicar(socket, usuario)       # Login
+    password = "pass {s}\r\n".format(s = senha)
+    comunicar(socket, password)      # Senha
+
+# Estabelece uma conexão com o servidor (com login) e configura
 def Conectar():
     socket = criarSocket(host, port)
     Login(socket, user, senha)
-    send_msg(socket, "opts UTF8 ON\r\n")       # Configura o tipo de ASCII utilizado
+    comunicar(socket, "opts UTF8 ON\r\n")      # Configura o tipo de ASCII utilizado
     return socket
 
-def Login(socket, user, senha):
-    send_msg(socket, "user {u}\r\n").format(u = user)       # Login
-    send_msg(socket, "pass {s}\r\n").format(s = senha)      # Senha
+# Cria um caminho de dados para transferir os dados 
+def caminhoDeDados(socket):
+    mandarMensagem(socket, "pasv\r\n")      # Estabelece a conexão como passiva
+    dados = receberMensagem(socket)         # Recebe os dados retornados pelo servidor
+    eliminar = ",.()\r\n"
+    endereco = [item for item in dados.split(" ")[-1].split(",")]
+    P1 = endereco[-2]
+    P2 = "".join([caracter for caracter in endereco[-1] if caracter not in eliminar])
+    porta = int(P1)*256 + int(P2)
+    caminho = s.socket(s.AF_INET, s.SOCK_STREAM)
+    end = (host, porta)
+    caminho.connect(end)
+    receberMensagem(caminho)
+    return caminho
+
+def Listar(socket, path):
+    caminho = caminhoDeDados(socket)
+    mensagem = "list "+path+final
+    mandarMensagem(socket, mensagem)
+    receberMensagem(caminho)
+
 
 socket = Conectar()
 while(True):
-    final = "\r\n"
     entrada = input()
     if entrada == "Conectar":
         socket.close()
         socket = Conectar()
-    # elif (entrada.split(" ")[0] == "list"):
-    #     msg = entrada + final
-    #     send_msg(cliente, msg)
-    #     cliente.close()
+    elif (entrada.split(" ")[0] == "Listar"):
+        msg = entrada.split(" ")[-1]
+        if msg == "Listar":
+            Listar(socket, "")
+        else:
+            Listar(socket, msg)
     else:
         msg = entrada + final
-        send_msg(socket, msg)
+        comunicar(socket, msg)
