@@ -10,6 +10,9 @@ def criarSocket(host,port):
 
 # Fechar o socket
 def fecharSocket(socket):
+    mensagem = "QUIT\r\n"
+    socket.send(mensagem.encode('utf-8')) 
+    receberMensagem(socket)
     socket.close()
 
 # Tenta enviar uma mensagem ao servidor
@@ -23,9 +26,9 @@ def mandarMensagem(socket, mensagem):
 # Tenta recebe as mensagens do servidor
 def receberMensagem(socket):
     TimeOut = False
-    while not TimeOut:                          # Recebe so servidor até superar o limite de tempo
+    while not TimeOut:              # Recebe so servidor até superar o limite de tempo
         try:
-            socket.settimeout(0.2)             # Tempo do time out
+            socket.settimeout(0.2)  # Tempo do time out
             resposta = socket.recv(2048)
             dados = resposta.decode('utf-8')
             print(dados)
@@ -87,18 +90,18 @@ senha = "12345"     # Senha do usuário
 # Constantes
 final = "\r\n"
 
-socket = Conectar(user, senha)
-while(True):
-    entrada = input()
-    if entrada == "Conectar":
-        socket.close()
-        socket = Conectar()
-    elif (entrada.split(" ")[0] == "Listar"):
-        msg = entrada.split(" ")[-1]
-        if msg == "Listar":
-            Listar(socket, "")
-        else:
-            Listar(socket, msg)
-    else:
-        msg = entrada + final
-        comunicar(socket, msg)
+# socket = Conectar(user, senha)
+# while(True):
+#     entrada = input()
+#     if entrada == "Conectar":
+#         socket.close()
+#         socket = Conectar(user, senha)
+#     elif (entrada.split(" ")[0] == "Listar"):
+#         msg = entrada.split(" ")[-1]
+#         if msg == "Listar":
+#             Listar(socket, "")
+#         else:
+#             Listar(socket, msg)
+#     else:
+#         msg = entrada + final
+#         comunicar(socket, msg)
