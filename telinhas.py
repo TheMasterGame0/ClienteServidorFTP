@@ -4,6 +4,8 @@ from tkinter import filedialog
 # Coisas a fazer.
 # Mexer com a questão das imagens.
 # Pensar em como mostrar a busca dos itens no servidor.
+# A busca do servidor será uma lista de strings
+# Abrir uma nova tela na função do botão. Na nova tela deverá ter um botão para selecionar o item escolhido.
 
 
 # Cliente criado

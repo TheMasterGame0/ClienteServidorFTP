@@ -26,16 +26,23 @@ def mandarMensagem(socket, mensagem):
 # Tenta recebe as mensagens do servidor
 def receberMensagem(socket):
     TimeOut = False
+    mensagemTotal = ""
+    Vazio = 0
     while not TimeOut:              # Recebe so servidor até superar o limite de tempo
         try:
             socket.settimeout(0.2)  # Tempo do time out
             resposta = socket.recv(2048)
             dados = resposta.decode('utf-8')
-            print(dados)
-            return dados
+            if dados in ["","\n","\r","\r\n"]:
+                Vazio += 1
+                if Vazio >= 2:
+                    return mensagemTotal
+            else:
+                print(dados)
+                mensagemTotal = mensagemTotal + dados
         except:
             TimeOut = True
-
+    return mensagemTotal
 # Envia uma mensagem e obtêm as respostas 
 def comunicar(socket, mensagem):
     mandarMensagem(socket,mensagem)
@@ -59,6 +66,7 @@ def Conectar(Usuario, Senha):
 def caminhoDeDados(socket):
     mandarMensagem(socket, "pasv\r\n")      # Estabelece a conexão como passiva
     dados = receberMensagem(socket)         # Recebe os dados retornados pelo servidor
+    
     eliminar = ",.()\r\n"
     endereco = [item for item in dados.split(" ")[-1].split(",")]
     P1 = endereco[-2]
@@ -80,6 +88,20 @@ def Listar(socket, path):
     receberMensagem(socket)
     caminho.close()
 
+# Faz download de algo que está no servidor
+# É preciso colocar o nome do arquivo desejado no path
+def Download(socket, path):
+    caminho = caminhoDeDados(socket)
+    mensagem = "RETR "+path+final
+    mandarMensagem(socket, mensagem)
+    receberMensagem(socket)
+    receberMensagem(caminho)
+    receberMensagem(socket)
+    caminho.close()
+
+def Upload(socket, path):
+    pass
+
 ############################################################################
 # Parâmetros universais para o código
 host = "127.0.0.1"  # IP do host utilizado
@@ -90,18 +112,26 @@ senha = "12345"     # Senha do usuário
 # Constantes
 final = "\r\n"
 
-# socket = Conectar(user, senha)
-# while(True):
-#     entrada = input()
-#     if entrada == "Conectar":
-#         socket.close()
-#         socket = Conectar(user, senha)
-#     elif (entrada.split(" ")[0] == "Listar"):
-#         msg = entrada.split(" ")[-1]
-#         if msg == "Listar":
-#             Listar(socket, "")
-#         else:
-#             Listar(socket, msg)
-#     else:
-#         msg = entrada + final
-#         comunicar(socket, msg)
+socket = Conectar(user, senha)
+while(True):
+    entrada = input()
+    if entrada == "Conectar":
+        socket.close()
+        socket = Conectar(user, senha)
+    elif (entrada.split(" ")[0] == "Listar"):
+        msg = entrada.split(" ")[-1]
+        if msg == "Listar":
+            Listar(socket, "")
+        else:
+            Listar(socket, msg)
+
+    elif (entrada.split(" ")[0] == "Download"):
+        msg = entrada.split(" ")[-1]
+        if msg == "Download":
+            Download(socket, "")
+        else:
+            Download(socket, msg)
+
+    else:
+        msg = entrada + final
+        comunicar(socket, msg)

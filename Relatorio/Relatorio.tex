@@ -1,0 +1,91 @@
+%\documentclass[11pt]{article}
+\documentclass[11pt]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+
+\usepackage{indentfirst}
+\usepackage{xcolor}         % Permite o uso de cores no texto
+\usepackage{colortbl}       % Permite colorir tabelas
+\usepackage{amsmath}        % Permite escrever os conjuntos matemáticos
+\usepackage{amssymb}        % Permite usar mais símbolos matemáticos, como o não existe.
+\usepackage{amsfonts}
+\usepackage{enumerate}      % Inclui a função enumerate 
+\usepackage{graphicx}
+\usepackage{hyperref}       % Permite o uso de hyperlinks no texto, com um link clicável
+\usepackage{tikz}           % Permite criar imagens
+\usepackage{multicol}       % Permite usar texto com várias colunas
+
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=3cm]{geometry}
+
+\renewcommand{\baselinestretch}{1.2}
+\setlength\parindent{5.5mm}
+
+\renewcommand{\b}[1]{\textbf{#1}} %Define um resumo de um comando
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\blueb}[1]{\textbf{\textcolor{blue}{#1}}}
+
+\newcommand{\inn}{$\in \mathbb{N}$ \ } % Abreviação para "no conjunto dos naturais".
+\newcommand{\inz}{$\in \mathbb{Z}$ \ } % Abreviação para "no conjunto dos inteiros".
+
+\newcommand{\pontoI}{\begin{enumerate}[\indent \indent $\bullet$]} % Cria o início da indentação normal do ponto
+\newcommand{\tracoI}{\begin{enumerate}[\indent -]} % Cria o início da indentação normal do traço.
+
+\newcommand{\fim}{\end{enumerate}} %Finaliza a indentação do ponto
+
+\newcommand{\imp}{$\Rightarrow$ \ } % Cria a seta de implicação
+
+\title{Compartilhamento de arquivos por FTP \\ \LARGE EzShare}
+\author{Gabriel Henrique do Nascimento Neres - 221029140 \\ Guilherme Nonato da Silva - 221002020}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+   . 
+\end{abstract}
+
+\begin{keywords}
+   FTP, .
+\end{keywords}
+
+
+% \textbf{\textit{Palavras-chave — }FTP, .} 
+
+\section{Introdução}
+% Contextualização do tema do trabalho dentro da disciplina e da área de redes de computadores. Descrição da estruturação do relatório.
+% O tema do trabalho é a implementação de um cliente de um servidor FTP. A descrição da estrutura deve ser relacionada com a descrição das divisões dos capítulos e o que será tratada em cada uma
+
+
+
+\section{Fundamentação Teórica}
+% Descrição dos conceitos teóricos e técnicas que foram utilizados e aplicados para desenvolver a compreensão do trabalho e o ambiente experimental.
+% Conceitos teóricos que são importantes para o projeto:
+% FTP: Definição do protocolo e funcionamento do servidor
+% TCP: Definir o funcionamento da comunicação para a explicação da parte do WireShark.
+% Princípio da transferência de dados.
+
+O projeto da construção de um cliente para um servidor do tipo FTP necessitou do estudo e a compreensão de alguns dados teóricos. Dentre as informações utilizadas podem ser elencadas os conceitos ligados ao protocolo utilizado por um servidor FTP, o funcionamento de uma comunicação TCP e os princípios da transferência de dados.
+
+O \b{protocolo FTP} defini diversas instruções e e funcionalidades baseado no protocolo do TELNET. Os principais conceitos que precisaram ser conhecidos para o desenvolvimento do cliente que iria se comunicar com o servidor foram:
+\pontoI
+   \item \b{Caminho de dados}: Para a transferência de dados entre o servidor e o cliente é preciso estabelecer um caminho de dados entre os dois. O caminho de dados é um canal que é criado para a transferência de um único "arquivo" entre o \textit{host} e o servidor, o que cria a necessidade de iniciar e finalizar a conexão de dados entre eles para cada solicitação feita.
+   \item \b{Conexão Passiva e Ativa}: O conceito foi importante para determinar qual tipo de conexão deveria ser estabelecida pelo cliente para alcançar o objetivo desejado. Esse conceito está diretamente ligado com a criação do caminho de dados.
+\fim
+
+
+\section{Análise de Resultados}
+
+\subsection{\textit{WireShark}}
+\section{Conclusões}
+% Deve ter entre 5 e 10 linhas resumindo as conclusões obtidas com o trabalho.
+ 
+% Verificar a formatação das referências
+\begin{thebibliography}{10}
+   \bibitem[1]{}{tkinter — Python interface to Tcl/Tk, \href{https://docs.python.org/3/library/tkinter.html}{https://docs.python.org/3/library/tkinter.html}}
+   \bibitem[2]{}{socket — Low-level networking interface, \href{https://docs.python.org/3/library/socket.html}{https://docs.python.org/3/library/socket.html}}
+\end{thebibliography}
+
+
+\end{document}
