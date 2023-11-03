@@ -83,10 +83,11 @@ def Listar(socket, path):
     caminho = caminhoDeDados(socket)
     mensagem = "list "+path+final
     mandarMensagem(socket, mensagem)
-    receberMensagem(socket)
-    receberMensagem(caminho)
+    confirmacao = receberMensagem(socket)                 # Resposta de confirmação da conexão
+    conteudo = receberMensagem(caminho)     # Conteúdo retornado
     receberMensagem(socket)
     caminho.close()
+    # Colocar o retorno que será utilizado pela tela
 
 # Faz download de algo que está no servidor
 # É preciso colocar o nome do arquivo desejado no path
@@ -94,14 +95,18 @@ def Download(socket, path):
     caminho = caminhoDeDados(socket)
     mensagem = "RETR "+path+final
     mandarMensagem(socket, mensagem)
-    receberMensagem(socket)
-    receberMensagem(caminho)
+    confirmacao = receberMensagem(socket)   # Resposta de confirmação da conexão
+    conteudo = receberMensagem(caminho)     # Conteúdo retornado
     receberMensagem(socket)
     caminho.close()
+    # Colocar o retorno que será utilizado pela tela
+    # Criar o arquivo que será salvo com o caminho informado pela tela
 
 def Upload(socket, path):
     pass
 
+def criarArquivo(path):
+    pass
 ############################################################################
 # Parâmetros universais para o código
 host = "127.0.0.1"  # IP do host utilizado
@@ -112,26 +117,26 @@ senha = "12345"     # Senha do usuário
 # Constantes
 final = "\r\n"
 
-socket = Conectar(user, senha)
-while(True):
-    entrada = input()
-    if entrada == "Conectar":
-        socket.close()
-        socket = Conectar(user, senha)
-    elif (entrada.split(" ")[0] == "Listar"):
-        msg = entrada.split(" ")[-1]
-        if msg == "Listar":
-            Listar(socket, "")
-        else:
-            Listar(socket, msg)
+# socket = Conectar(user, senha)
+# while(True):
+#     entrada = input()
+#     if entrada == "Conectar":
+#         socket.close()
+#         socket = Conectar(user, senha)
+#     elif (entrada.split(" ")[0] == "Listar"):
+#         msg = entrada.split(" ")[-1]
+#         if msg == "Listar":
+#             Listar(socket, "")
+#         else:
+#             Listar(socket, msg)
 
-    elif (entrada.split(" ")[0] == "Download"):
-        msg = entrada.split(" ")[-1]
-        if msg == "Download":
-            Download(socket, "")
-        else:
-            Download(socket, msg)
+#     elif (entrada.split(" ")[0] == "Download"):
+#         msg = entrada.split(" ")[-1]
+#         if msg == "Download":
+#             Download(socket, "")
+#         else:
+#             Download(socket, msg)
 
-    else:
-        msg = entrada + final
-        comunicar(socket, msg)
+#     else:
+#         msg = entrada + final
+#         comunicar(socket, msg)

@@ -2,15 +2,24 @@ from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import filedialog
 # Coisas a fazer.
-# Mexer com a questão das imagens.
-# Pensar em como mostrar a busca dos itens no servidor.
-# A busca do servidor será uma lista de strings
-# Abrir uma nova tela na função do botão. Na nova tela deverá ter um botão para selecionar o item escolhido.
+# Fazer o menu para decidir o que baixar.
+#   Pegar o texto retornado pelo servidor e colocá-lo em uma "lista" para ser selecionado
+#   Pegar a string retornada, utilizar um split com os espaços e percorrer de maneira padronizada em grupos de 4 em 4. 
+#   Fazer a verificação da 3º posição para ver se é um int ou a string "<DIR>".
+#   Para saber quantos elementos tem no diretório atual será obtido com o len da lista montada dividida por 4.
+#   O retorno do item escolhido deverá ser no formato:
+#       - Diretório raiz: Apenas o nome do arquivo. Ex: \Teste.txt
+#       - Uma pasta: O caminho do raiz até o arquivo. Ex: \Pasta\OutroTeste.txt
+#
+# Fazer o menu de decidir onde baixar.
+# Fazer no botão de Enviar no Upload a opção de criar pastas no servidor e selecionar onde será salvo (Mesmo que o item anterior).
+# Código de sucesso da transferência: 226 Transfer complete.
 
 
 # Cliente criado
 from Cliente import *
 
+# Função acionada pelo botão para conectar ao servidor e atualizar a tela
 def conectarServidor():
     try: 
         status = "Online"
@@ -28,6 +37,7 @@ def conectarServidor():
 
     return socket
 
+# Função acionada pelo botão para desconectar do servidor e atualizar a tela
 def desconectaServidor(socket):
     try:
         fecharSocket(socket)
@@ -84,13 +94,13 @@ def selecionarUp():
         match tipoArquivo: # Casos de tipo de arquivo: Decide qual ícone será mostrado na tela
             case "png": # Mostra a imagem selecionada
                 print("Imagem!")
-                imgAjustada = Image.open(telaMain.filename).resize((150, 150))
+                imgAjustada = Image.open(telaMain.filename).resize((200, 200))
                 img = ImageTk.PhotoImage(imgAjustada)
                 imgLabel = Label(image=img)
                 imgLabel.grid(column=1, row=2)
             case "txt": # Mostra a icone correspondente
                 print("Texto!")
-                iconeAjustado = Image.open("iconeTXT.png").resize((200, 200)) # /Users/PC/Documents/GitHub/ClienteServidorFTP/iconeTXT.png
+                iconeAjustado = Image.open("Recursos\\iconeTXT.png").resize((200, 200))
                 icone = ImageTk.PhotoImage(iconeAjustado)
                 iconeLabel = Label(image=icone)
                 iconeLabel.grid(column=1, row=2)
@@ -109,7 +119,7 @@ telaMain.maxsize(790, 660)
 #telaMain.geometry("790x660")
 
 # Define o ícone da janela (Canto esquerdo superior)
-icone = Image.open("C:\\Users\\PC\\Documents\\GitHub\\ClienteServidorFTP\\Recursos\\iconeApp.png")
+icone = Image.open("Recursos\\iconeApp.png")
 imgIcone = ImageTk.PhotoImage(icone)
 telaMain.wm_iconphoto(False, imgIcone)
 
@@ -142,7 +152,6 @@ btnSelecionarDl = Button(telaMain, text="Selecionar", command=selecionarDl)
 # Botões de upload
 btnEnviarUp = Button(telaMain, text="Enviar", command=enviarImg)
 btnAbrirUp = Button(telaMain, text="Abrir", command=selecionarUp)
-
 
 # Dispõe os botões no display#
 btnConectar.grid(column=1, row=1)
