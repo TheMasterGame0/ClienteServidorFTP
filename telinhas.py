@@ -58,15 +58,37 @@ def enviarImg():
 def baixarImg():
     pass
 
-def selecionarDl():
-    pass
+def selecionarDl(confirmacao, conteudo):
+    if "Transfer Complete" in confirmacao: # Verifica se a conexão foi estabelecida
+        # Cria a telinha de seleção por cima da Main
+        telaSelecao = Toplevel(telaMain)
+        telaSelecao.geometry("400x100")
+        telaSelecao.maxsize(600, 350)
+        telaSelecao.title("Selecionar Imagem")
 
-def selecionarDl():
-    # Cria a telinha de seleção por cima da Main
-    telaSelecao = Toplevel(telaMain)
-    telaSelecao.geometry("400x100")
-    telaSelecao.maxsize(600,350)
-    telaSelecao.title("Selecionar Imagem")
+        # Cria a caixa vazia que receberá as informacoes dos arquivos
+        listaConteudo = Listbox(telaSelecao)
+        listaConteudo.pack(pady=15)
+
+        # Divide o conteudo recebido em listas de 4 itens
+        conteudo.split()
+        conteudo = [conteudo[i:i + 4] for i in range(0, len(conteudo), 4)]
+        print(conteudo)
+
+        # Insere os itens na lista vazia
+        for item in conteudo:
+            listaConteudo.insert(END, item)
+
+        # Determina e registra qual item foi selecionado pelo usuário
+        for i in listaConteudo.curselection():
+            arquivoSelecionado = listaConteudo.get(i)[4]
+            tipoArquivo = listaConteudo.get(i)[3]
+
+            print(arquivoSelecionado)
+
+
+    else:
+        pass # Atualizar texto informativo para dizer que a conexao nao foi estabelecida
 
 
 
@@ -147,7 +169,7 @@ btnConectar = (Button(telaMain, text="Conectar ao Servidor", command= lambda: so
 
 # Botões de download
 btnBaixarDl = Button(telaMain, text="Baixar", command=baixarImg)
-btnSelecionarDl = Button(telaMain, text="Selecionar", command=selecionarDl)
+btnSelecionarDl = Button(telaMain, text="Selecionar", command= lambda: selecionarDl(confirmacao, conteudo)) # Argumento vem do codigo de "Cliente"
 
 # Botões de upload
 btnEnviarUp = Button(telaMain, text="Enviar", command=enviarImg)
