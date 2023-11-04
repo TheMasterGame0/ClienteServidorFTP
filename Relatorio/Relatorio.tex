@@ -28,7 +28,7 @@
 \newcommand{\inn}{$\in \mathbb{N}$ \ } % Abreviação para "no conjunto dos naturais".
 \newcommand{\inz}{$\in \mathbb{Z}$ \ } % Abreviação para "no conjunto dos inteiros".
 
-\newcommand{\pontoI}{\begin{enumerate}[\indent \indent $\bullet$]} % Cria o início da indentação normal do ponto
+\newcommand{\pontoI}{\begin{enumerate}[\indent $\bullet$]} % Cria o início da indentação normal do ponto
 \newcommand{\tracoI}{\begin{enumerate}[\indent -]} % Cria o início da indentação normal do traço.
 
 \newcommand{\fim}{\end{enumerate}} %Finaliza a indentação do ponto
@@ -43,21 +43,38 @@
 \maketitle
 
 \begin{abstract}
-   . 
+   O presente relatório visa 
 \end{abstract}
 
-\begin{keywords}
-   FTP, .
-\end{keywords}
+% \begin{keywords}
+%    FTP, .
+% \end{keywords}
 
 
-% \textbf{\textit{Palavras-chave — }FTP, .} 
+ \textbf{\textit{Palavras-chave — }FTP, Servidor, Python.} 
 
 \section{Introdução}
 % Contextualização do tema do trabalho dentro da disciplina e da área de redes de computadores. Descrição da estruturação do relatório.
 % O tema do trabalho é a implementação de um cliente de um servidor FTP. A descrição da estrutura deve ser relacionada com a descrição das divisões dos capítulos e o que será tratada em cada uma
 
+%- Explicar o intuito do trabalho
+%- Citar as ferramentas utilizadas
+%- Relacionar o trabalho com a disciplina
+%- Explicar a estrutura do relatório
 
+O intuito do trabalho a ser desenvolvido é compreender e implementar um cliente capaz de se comunicar com um servidor FTP, contando com uma interface que permita a um possível usuário utilizar o programa criado intuitivamente. Utilizaremos a versão 3.11 do Python para o desenvolvimento do código, tanto para configurar o cliente quanto para desenvolver a interface gráfica. Para o servidor será utilizado o servidor FTP já implementado por padrão no sistema operacional Windows.
+
+O presente relatório se dividirá em mais três seções: 
+\pontoI
+\item Uma para situar o conteúdo teórico do projeto e contextualizar o material aprendido em aula; 
+\item Uma focada em analisar e descrever as implementações feitas e os resultados obtidos pelo programa desenvolvido, sendo subdividido em dois tópicos:
+\tracoI
+    \item Exemplos de uso do cliente com o fluxo de mensagem entre cliente e servidor.
+    \item Análise da comunicação cliente-servidor pelo Wireshark com a identificação dos endereços IP e a análise das mensagens para comprovar o bom funcionamento do cliente; 
+\fim
+\item Uma última para extrair conclusões dos processos feitos, além de considerar o que foi aprendido ao decorrer do projeto.
+
+\fim
 
 \section{Fundamentação Teórica}
 % Descrição dos conceitos teóricos e técnicas que foram utilizados e aplicados para desenvolver a compreensão do trabalho e o ambiente experimental.
@@ -68,7 +85,7 @@
 
 O projeto da construção de um cliente para um servidor do tipo FTP necessitou do estudo e a compreensão de alguns dados teóricos. Dentre as informações utilizadas podem ser elencadas os conceitos ligados ao protocolo utilizado por um servidor FTP, o funcionamento de uma comunicação TCP e os princípios da transferência de dados.
 
-O \b{protocolo FTP} defini diversas instruções e e funcionalidades baseado no protocolo do TELNET. Os principais conceitos que precisaram ser conhecidos para o desenvolvimento do cliente que iria se comunicar com o servidor foram:
+O \b{protocolo FTP} define diversas instruções e funcionalidades baseado no protocolo do TELNET. Os principais conceitos que precisaram ser conhecidos para o desenvolvimento do cliente que iria se comunicar com o servidor foram:
 \pontoI
    \item \b{Caminho de dados}: Para a transferência de dados entre o servidor e o cliente é preciso estabelecer um caminho de dados entre os dois. O caminho de dados é um canal que é criado para a transferência de um único "arquivo" entre o \textit{host} e o servidor, o que cria a necessidade de iniciar e finalizar a conexão de dados entre eles para cada solicitação feita.
    \item \b{Conexão Passiva e Ativa}: O conceito foi importante para determinar qual tipo de conexão deveria ser estabelecida pelo cliente para alcançar o objetivo desejado. Esse conceito está diretamente ligado com a criação do caminho de dados.

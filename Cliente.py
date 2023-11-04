@@ -43,6 +43,7 @@ def receberMensagem(socket):
         except:
             TimeOut = True
     return mensagemTotal
+
 # Envia uma mensagem e obtêm as respostas 
 def comunicar(socket, mensagem):
     mandarMensagem(socket,mensagem)
@@ -83,17 +84,18 @@ def Listar(socket, path):
     caminho = caminhoDeDados(socket)
     mensagem = "list "+path+final
     mandarMensagem(socket, mensagem)
-    confirmacao = receberMensagem(socket)                 # Resposta de confirmação da conexão
+    confirmacao = receberMensagem(socket)   # Resposta de confirmação da conexão
     conteudo = receberMensagem(caminho)     # Conteúdo retornado
     receberMensagem(socket)
     caminho.close()
     # Colocar o retorno que será utilizado pela tela
+    return confirmacao, conteudo
 
 # Faz download de algo que está no servidor
 # É preciso colocar o nome do arquivo desejado no path
-def Download(socket, path):
+def Download(socket, pathServidor, pathLocal):
     caminho = caminhoDeDados(socket)
-    mensagem = "RETR "+path+final
+    mensagem = "RETR "+pathServidor+final
     mandarMensagem(socket, mensagem)
     confirmacao = receberMensagem(socket)   # Resposta de confirmação da conexão
     conteudo = receberMensagem(caminho)     # Conteúdo retornado
@@ -101,9 +103,34 @@ def Download(socket, path):
     caminho.close()
     # Colocar o retorno que será utilizado pela tela
     # Criar o arquivo que será salvo com o caminho informado pela tela
+    try:
+        if type(pathLocal) == type(["lista", "de", "teste"]):
+            path = "".join(x+" " for x in pathLocal)
+            with open(file=path, mode = "x") as f:
+                f.write(conteudo)
+        else:
+            with open(pathLocal, "x") as f:
+                f.write(conteudo)
+    except FileNotFoundError:
+        print("O path fornecido tem problemas")
+    except FileExistsError:
+        print("Existe um arquivo com o mesmo nome fornecido")
+    
+    return confirmacao
 
-def Upload(socket, path):
-    pass
+def Upload(socket, pathServidor, texto):
+    caminho = caminhoDeDados(socket)
+    tex = "".join(x+" " for x in texto)
+    tex = tex+"\r\n"
+    mandarMensagem(socket, tex)
+    receberMensagem(socket)
+    mensagem = "STOR "+pathServidor+final 
+    mandarMensagem(socket, mensagem)
+    confirmacao = receberMensagem(socket)   # Resposta de confirmação da conexão
+    conteudo = receberMensagem(caminho)     # Conteúdo retornado
+    receberMensagem(socket)
+    caminho.close()    
+    return confirmacao
 
 def criarArquivo(path):
     pass
@@ -131,11 +158,20 @@ final = "\r\n"
 #             Listar(socket, msg)
 
 #     elif (entrada.split(" ")[0] == "Download"):
-#         msg = entrada.split(" ")[-1]
-#         if msg == "Download":
-#             Download(socket, "")
+#         if entrada != "Download":
+#             pathServidor = entrada.split(" ")[1]
+#             pathLocal = entrada.split(" ")[2:]
+#             Download(socket, pathServidor, pathLocal)
 #         else:
-#             Download(socket, msg)
+#             print("Precisa dos paths")
+
+#     elif (entrada.split(" ")[0] == "Upload"):
+#         if entrada != "Upload":
+#             pathServidor = entrada.split(" ")[1]
+#             texto = entrada.split(" ")[2:]
+#             Upload(socket, pathServidor, texto)
+#         else:
+#             print("Precisa dos paths")
 
 #     else:
 #         msg = entrada + final

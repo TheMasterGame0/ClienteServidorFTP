@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  31 OCT 2023 09:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  3 NOV 2023 13:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/FTP/Relatorio/Relatorio.tex"
-(c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/FTP/Relatorio/Relatorio.tex
+**"c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex"
+(c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-07> (./IEEEtran.cls
 Document Class: IEEEtran 2002/08/13 revision V1.6 by Michael Shell
@@ -689,35 +689,49 @@ Package hyperref Info: Link coloring OFF on input line 41.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: \indent \indent $\bullet $ on input line 72.
+             The label is: \indent $\bullet $ on input line 68.
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 72.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 68.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 68.
 (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 68.
  (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
+
+LaTeX Warning: The counter will not be printed.
+             The label is: \indent - on input line 71.
+
+
+LaTeX Warning: The counter will not be printed.
+             The label is: \indent $\bullet $ on input line 89.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 []\OT1/ptm/m/n/9 tkinter | Python in-ter-face to Tcl/Tk,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \vbox (badness 1622) has occurred while \output is active []
+
+ [1{c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 104--105
 []\OT1/ptm/m/n/9 socket | Low-level networ-king in-ter-face,
  []
 
-[1{c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-
+[2
 pdfTeX warning (ext4): destination with the same identifier (name{cite.}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.91 \end{document}
-                   ] (./Relatorio.aux)
+l.108 \end{document}
+                    
+
+] (./Relatorio.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -725,18 +739,18 @@ Package rerunfilecheck Info: File `Relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: 2C98EF816D3DEFD993262E433B52B9A0;716.
  ) 
 Here is how much of TeX's memory you used:
- 22216 strings out of 476029
- 411902 string characters out of 5794164
- 1865340 words of memory out of 5000000
+ 22223 strings out of 476029
+ 411984 string characters out of 5794164
+ 1873340 words of memory out of 5000000
  42280 multiletter control sequences out of 15000+600000
- 547635 words of font info for 95 fonts, out of 8000000 for 9000
+ 548731 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,6n,80p,566b,452s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,6n,80p,644b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (1 page, 57663 bytes).
+Output written on Relatorio.pdf (2 pages, 60664 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
- 11 named destinations out of 1000 (max. 500000)
+ 84 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
+ 17 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

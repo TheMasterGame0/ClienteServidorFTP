@@ -1,1 +1,1 @@
-Teste de texto no arquivo!
+Teste de texto em um arquivo!

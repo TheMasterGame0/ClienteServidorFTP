@@ -1,8 +1,8 @@
-PWD c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/FTP/Relatorio
+PWD c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio
 INPUT c:/texlive/2022/texmf.cnf
 INPUT c:/texlive/2022/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/FTP/Relatorio/Relatorio.tex
+INPUT c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex
 OUTPUT Relatorio.log
 INPUT ./IEEEtran.cls
 INPUT ./IEEEtran.cls
@@ -917,12 +917,14 @@ INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmbi7t.vf
 INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
 INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
 INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmbi7t.vf
+INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
+INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
+INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmrc7t.vf
 INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
-INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
-INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
 INPUT c:/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT c:/texlive/2022/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf

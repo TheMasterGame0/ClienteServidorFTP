@@ -23,11 +23,14 @@ from Cliente import *
 def conectarServidor():
     try: 
         status = "Online"
-        socket = Conectar(user, senha)
+        #socket = Conectar(user, senha)
+        socket = 0 #Para teste sem o servidor
+
         # Botão para desconectar o servidor
         global btnDesconectar;
         btnDesconectar = (Button(telaMain, text="Desconecte do Servidor", command= lambda: desconectaServidor(socket)))
         btnConectar.destroy()
+        iniciarBotoes(socket)   # Cria os demais botões da tela
         btnDesconectar.grid(column=1, row=1)
     except:
         status = "Offline"
@@ -58,20 +61,24 @@ def enviarImg():
 def baixarImg():
     pass
 
-def selecionarDl(confirmacao, conteudo):
-    if "Transfer Complete" in confirmacao: # Verifica se a conexão foi estabelecida
+def selecionarDl(socket):
+    #confirmacao, conteudo = Listar(socket, "") 
+    confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.", "03-10-22  01:35AM               419965 Imagem.png\n11-02-23  09:53PM       <DIR>          Pasta\n11-03-23  02:20PM                   29 Teste.txt\n11-03-23  10:12PM                    0 Teste4.txt"      #Para teste sem o servidor
+
+
+    if "transfer complete" in confirmacao.lower(): # Verifica se a conexão foi estabelecida
         # Cria a telinha de seleção por cima da Main
         telaSelecao = Toplevel(telaMain)
-        telaSelecao.geometry("400x100")
-        telaSelecao.maxsize(600, 350)
-        telaSelecao.title("Selecionar Imagem")
+        telaSelecao.geometry("400x200") # X, Y
+        telaSelecao.maxsize(400, 400)
+        telaSelecao.title("Selecionar Arquivo")
 
-        # Cria a caixa vazia que receberá as informacoes dos arquivos
+        # Cria a caixa vazia que receberá as informações dos arquivos
         listaConteudo = Listbox(telaSelecao)
-        listaConteudo.pack(pady=15)
+        listaConteudo.pack(expand = True, fill = BOTH, padx=15, pady = 15)
 
-        # Divide o conteudo recebido em listas de 4 itens
-        conteudo.split()
+        # Divide o conteúdo recebido em listas de 4 itens
+        conteudo = conteudo.split()
         conteudo = [conteudo[i:i + 4] for i in range(0, len(conteudo), 4)]
         print(conteudo)
 
@@ -86,8 +93,8 @@ def selecionarDl(confirmacao, conteudo):
 
             print(arquivoSelecionado)
 
-
     else:
+        print("erro")
         pass # Atualizar texto informativo para dizer que a conexao nao foi estabelecida
 
 
@@ -132,6 +139,34 @@ def selecionarUp():
     except:
         print("Nenhuma imagem selecionada ou erro na seleção!")
 
+
+def iniciarBotoes(socket):
+############ Labels ############
+    acao = Label(telaMain,text = "Aguardando Ação...") # Texto informando a ação tomada
+    acao.grid(column=1, row=4)
+
+    bio = Label(telaMain,text = "Upload")
+    bio.grid(column=0, row=3)
+
+    bio = Label(telaMain,text = "Download")
+    bio.grid(column=2, row=3)
+
+############ Botões ############    
+    # Botões de download
+    btnBaixarDl = Button(telaMain, text="Baixar", command=baixarImg)
+    btnSelecionarDl = Button(telaMain, text="Selecionar", command= lambda: selecionarDl(socket)) 
+
+    # Botões de upload
+    btnEnviarUp = Button(telaMain, text="Enviar", command=enviarImg)
+    btnAbrirUp = Button(telaMain, text="Abrir", command=selecionarUp)
+
+######### Dispõe os botões no display #########
+    btnBaixarDl.grid(column=2, row=4)
+    btnSelecionarDl.grid(column=2, row=5)
+    btnEnviarUp.grid(column=0, row=4)
+    btnAbrirUp.grid(column=0, row=5)
+
+
 ################################# CÓDIGO PRINCIPAL ################################
 
 # Cria a tela principal e limita seu tamanho
@@ -151,58 +186,12 @@ status = "Offline"
 bio = Label(telaMain,text = "Faça upload e download de arquivos no servidor! \n Status: " + status) # Header
 bio.grid(column=1, row=0)
 
-acao = Label(telaMain,text = "Aguardando Ação...") # Texto informando a ação tomada
-acao.grid(column=1, row=4)
-
-bio = Label(telaMain,text = "Upload")
-bio.grid(column=0, row=3)
-
-bio = Label(telaMain,text = "Download")
-bio.grid(column=2, row=3)
-
-
-socket = 0
 
 #Cria todos os botões do menu principal#
 # Botão para conectar no servidor
-btnConectar = (Button(telaMain, text="Conectar ao Servidor", command= lambda: socket == conectarServidor()))
-
-# Botões de download
-btnBaixarDl = Button(telaMain, text="Baixar", command=baixarImg)
-btnSelecionarDl = Button(telaMain, text="Selecionar", command= lambda: selecionarDl(confirmacao, conteudo)) # Argumento vem do codigo de "Cliente"
-
-# Botões de upload
-btnEnviarUp = Button(telaMain, text="Enviar", command=enviarImg)
-btnAbrirUp = Button(telaMain, text="Abrir", command=selecionarUp)
+btnConectar = (Button(telaMain, text="Conectar ao Servidor", command= conectarServidor))
 
 # Dispõe os botões no display#
 btnConectar.grid(column=1, row=1)
-btnBaixarDl.grid(column=2, row=4)
-btnSelecionarDl.grid(column=2, row=5)
-btnEnviarUp.grid(column=0, row=4)
-btnAbrirUp.grid(column=0, row=5)
 
 telaMain.mainloop()
-
-
-
-################################# CÓDIGO ANTIGO #################################
-'''
-import tkinter as tk
-#from tkinter import ttk
-
-#Cria a tela principal
-telaMain = tk.Tk()
-telaMain.title("Teste")
-telaMain.geometry("600x400")
-
-#Cria os botões no display
-btnEnviar = tk.Button(telaMain, text="Enviar", padx=10)
-btnEnviar.pack(expand=1, side="right")
-
-btnSelecionar = tk.Button(telaMain, text="Selecionar", padx=10)
-btnSelecionar.pack(expand=1, side="right")
-
-#Roda a tela principal
-telaMain.mainloop()
-'''
