@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import ImageTk,Image
+from PIL import ImageTk, Image
 from tkinter import filedialog
 # Coisas a fazer.
 # Fazer o menu para decidir o que baixar.
@@ -62,16 +62,18 @@ def baixarImg():
     pass
 
 def selecionarDl(socket):
-    #confirmacao, conteudo = Listar(socket, "") 
-    confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.", "03-10-22  01:35AM               419965 Imagem.png\n11-02-23  09:53PM       <DIR>          Pasta\n11-03-23  02:20PM                   29 Teste.txt\n11-03-23  10:12PM                    0 Teste4.txt"      #Para teste sem o servidor
+    #confirmacao, conteudo = Listar(socket, "")
 
+    global textoinfo
+    confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.", "03-10-22  01:35AM               419965 Imagem.png\n11-02-23  09:53PM       <DIR>          Pasta\n11-03-23  02:20PM                   29 Teste.txt\n11-03-23  10:12PM                    0 Teste4.txt"      #Para teste sem o servidor
 
     if "transfer complete" in confirmacao.lower(): # Verifica se a conexão foi estabelecida
         # Cria a telinha de seleção por cima da Main
         telaSelecao = Toplevel(telaMain)
-        telaSelecao.geometry("400x200") # X, Y
+        telaSelecao.geometry("400x300") # X, Y
         telaSelecao.maxsize(400, 400)
         telaSelecao.title("Selecionar Arquivo")
+        telaSelecao.resizable(0,0)
 
         # Cria a caixa vazia que receberá as informações dos arquivos
         listaConteudo = Listbox(telaSelecao)
@@ -80,24 +82,33 @@ def selecionarDl(socket):
         # Divide o conteúdo recebido em listas de 4 itens
         conteudo = conteudo.split()
         conteudo = [conteudo[i:i + 4] for i in range(0, len(conteudo), 4)]
-        print(conteudo)
 
         # Insere os itens na lista vazia
         for item in conteudo:
             listaConteudo.insert(END, item)
 
-        # Determina e registra qual item foi selecionado pelo usuário
-        for i in listaConteudo.curselection():
-            arquivoSelecionado = listaConteudo.get(i)[4]
-            tipoArquivo = listaConteudo.get(i)[3]
-
-            print(arquivoSelecionado)
+        btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(listaConteudo, telaSelecao))
+        btnSelecao.pack(anchor = "s")
 
     else:
-        print("erro")
-        pass # Atualizar texto informativo para dizer que a conexao nao foi estabelecida
+        textoInfo.set("Erro") # Atualiza texto informativo para dizer que a conexao não foi estabelecida
 
+def selecaoArquivo(listaConteudo, telaSelecao):
+    # Determina e registra qual item foi selecionado pelo usuário
+    arquivoSelecionado = False
 
+    for i in listaConteudo.curselection():
+        arquivoSelecionado = listaConteudo.get(i)[3]
+        tipoArquivo = listaConteudo.get(i)[2]
+
+        print(arquivoSelecionado)
+
+    if arquivoSelecionado:
+        textoInfo.set("Arquivo Selecionado,\nAguardando Download...")
+        telaSelecao.destroy()
+    else:
+        textoInfo.set("Nenhum Arquivo Selecionado!")
+        telaSelecao.destroy()
 
 def selecionarUp():
     # Ainda precisa definir mais tipos de arquivos para envio
@@ -114,10 +125,11 @@ def selecionarUp():
     # iconeLabel.grid(column=1, row=2)
 
     try:
-        # ERRO: Algumas imagens com dimensoes muito grandes e/ou certas razões não passam para a tela
+        # Problema: Arquivos que não são PNGs, TXTs ou PDFs não provocam reacão nenhuma
+
+        ####### ARQUIVO SELECIONADO PARA UPLOAD -> 'telaMain.filename' #######
         telaMain.filename = filedialog.askopenfilename(initialdir="/Users/PC/Downloads", title="Selecionar Imagem",
-                                                       filetypes=(("All files", "*.*"), ("PNG files", "*.png"),
-                                                                  ("JPEG files", "*.jpeg")))
+                                                       filetypes=(("All files", "*.*"), ("TXT files", "*.txt")))
         tipoArquivo = telaMain.filename.split('.', 1)[1] # Determina o tipo de extensão do arquivo selecionado
 
         match tipoArquivo: # Casos de tipo de arquivo: Decide qual ícone será mostrado na tela
@@ -127,14 +139,16 @@ def selecionarUp():
                 img = ImageTk.PhotoImage(imgAjustada)
                 imgLabel = Label(image=img)
                 imgLabel.grid(column=1, row=2)
-            case "txt": # Mostra a icone correspondente
+                textoInfo.set("Imagem Selecionada,\nAguardando Upload...")
+            case "txt": # Mostra o icone de TXT
                 print("Texto!")
                 iconeAjustado = Image.open("Recursos\\iconeTXT.png").resize((200, 200))
                 icone = ImageTk.PhotoImage(iconeAjustado)
-                iconeLabel = Label(image=icone)
-                iconeLabel.grid(column=1, row=2)
-            case"pdf":
-                print("PDF!")
+                imgLabel = Label(image=icone)
+                imgLabel.grid(column=1, row=2)
+                textoInfo.set("Arquivo de texto Selecionado,\nAguardando Upload...")
+            case _: # Qualquer outro tipo de arquivo
+                textoInfo.set("Arquivo Inválido!")
 
     except:
         print("Nenhuma imagem selecionada ou erro na seleção!")
@@ -142,7 +156,8 @@ def selecionarUp():
 
 def iniciarBotoes(socket):
 ############ Labels ############
-    acao = Label(telaMain,text = "Aguardando Ação...") # Texto informando a ação tomada
+    global textoInfo
+    acao = Label(telaMain,textvariable = textoInfo) # Texto informando a ação tomada
     acao.grid(column=1, row=4)
 
     bio = Label(telaMain,text = "Upload")
@@ -173,7 +188,8 @@ def iniciarBotoes(socket):
 telaMain = Tk()
 telaMain.title("EzShare")
 telaMain.maxsize(790, 660)
-#telaMain.geometry("790x660")
+telaMain.resizable(0,0)
+telaSelecao = ""
 
 # Define o ícone da janela (Canto esquerdo superior)
 icone = Image.open("Recursos\\iconeApp.png")
@@ -183,6 +199,8 @@ telaMain.wm_iconphoto(False, imgIcone)
 status = "Offline"
 
 #Cria os textos informativos#
+textoInfo = StringVar() # Variável do tkinter, é atualizada com *.set()
+textoInfo.set("Aguardando Ação...")
 bio = Label(telaMain,text = "Faça upload e download de arquivos no servidor! \n Status: " + status) # Header
 bio.grid(column=1, row=0)
 
