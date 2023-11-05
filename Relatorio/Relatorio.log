@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  3 NOV 2023 13:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  5 NOV 2023 02:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -582,76 +582,97 @@ Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \mult@nat@firstbox=\box110
 \colbreak@box=\box111
 \mc@col@check@num=\count319
+) (c:/texlive/2022/texmf-dist/tex/latex/pythonhighlight/pythonhighlight.sty
+Package: pythonhighlight 2017/02/09 python code highlighting; provided by Olivier Verdier <olivier.verdier@gmail.com>
+ (c:/texlive/2022/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count320
+\lst@gtempboxa=\box112
+\lst@token=\toks40
+\lst@length=\count321
+\lst@currlwidth=\dimen284
+\lst@column=\count322
+\lst@pos=\count323
+\lst@lostspace=\dimen285
+\lst@width=\dimen286
+\lst@newlines=\count324
+\lst@lineno=\count325
+\lst@maxwidth=\dimen287
+ (c:/texlive/2022/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count326
+\lst@skipnumbers=\count327
+\lst@framebox=\box113
+) (c:/texlive/2022/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
 ) (c:/texlive/2022/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (c:/texlive/2022/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count320
-\Gm@cntv=\count321
-\c@Gm@tempcnt=\count322
-\Gm@bindingoffset=\dimen284
-\Gm@wd@mp=\dimen285
-\Gm@odd@mp=\dimen286
-\Gm@even@mp=\dimen287
-\Gm@layoutwidth=\dimen288
-\Gm@layoutheight=\dimen289
-\Gm@layouthoffset=\dimen290
-\Gm@layoutvoffset=\dimen291
-\Gm@dimlist=\toks40
+\Gm@cnth=\count328
+\Gm@cntv=\count329
+\c@Gm@tempcnt=\count330
+\Gm@bindingoffset=\dimen288
+\Gm@wd@mp=\dimen289
+\Gm@odd@mp=\dimen290
+\Gm@even@mp=\dimen291
+\Gm@layoutwidth=\dimen292
+\Gm@layoutheight=\dimen293
+\Gm@layouthoffset=\dimen294
+\Gm@layoutvoffset=\dimen295
+\Gm@dimlist=\toks41
 ) (c:/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count323
-\l__pdf_internal_box=\box112
-) (./Relatorio.aux
-
-LaTeX Warning: Label `' multiply defined.
-
-)
+\l__color_backend_stack_int=\count331
+\l__pdf_internal_box=\box114
+) (./Relatorio.aux)
 \openout1 = `Relatorio.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
  (c:/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count324
-\scratchdimen=\dimen292
-\scratchbox=\box113
-\nofMPsegments=\count325
-\nofMParguments=\count326
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count327
-\MPscratchDim=\dimen293
-\MPnumerator=\count328
-\makeMPintoPDFobject=\count329
-\everyMPtoPDFconversion=\toks42
+\scratchcounter=\count332
+\scratchdimen=\dimen296
+\scratchbox=\box115
+\nofMPsegments=\count333
+\nofMParguments=\count334
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count335
+\MPscratchDim=\dimen297
+\MPnumerator=\count336
+\makeMPintoPDFobject=\count337
+\everyMPtoPDFconversion=\toks43
 ) (c:/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (c:/texlive/2022/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 41.
+Package hyperref Info: Link coloring OFF on input line 43.
  (./Relatorio.out) (./Relatorio.out)
 \@outlinefile=\write4
 \openout4 = `Relatorio.out'.
 
+\c@lstlisting=\count338
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -689,68 +710,81 @@ Package hyperref Info: Link coloring OFF on input line 41.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: \indent $\bullet $ on input line 68.
+             The label is: \indent $\bullet $ on input line 70.
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 68.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 68.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 70.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
 (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 68.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
  (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 LaTeX Warning: The counter will not be printed.
-             The label is: \indent - on input line 71.
+             The label is: \indent - on input line 73.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: \indent $\bullet $ on input line 89.
+             The label is: \indent $\bullet $ on input line 92.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--104
-[]\OT1/ptm/m/n/9 tkinter | Python in-ter-face to Tcl/Tk,
+Underfull \hbox (badness 5374) in paragraph at lines 91--92
+[]\OT1/ptm/m/n/11 O \OT1/ptm/b/n/11 pro-to-colo FTP \OT1/ptm/m/n/11 [[]] de-fine di-ver-sas
  []
 
-
-Underfull \vbox (badness 1622) has occurred while \output is active []
-
- [1{c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
-[]\OT1/ptm/m/n/9 socket | Low-level networ-king in-ter-face,
+Underfull \hbox (badness 6412) in paragraph at lines 101--102
+[]\OT1/ptm/m/n/11 O ser-vi-dor n[]ao pre-ci-sou de ne-nhuma
  []
 
-[2
-pdfTeX warning (ext4): destination with the same identifier (name{cite.}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.108 \end{document}
-                    
+(c:/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 109.
+ (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [2] [3]
+Underfull \hbox (badness 1983) in paragraph at lines 283--284
+[]\OT1/ptm/m/n/11 Dessa forma, s[]ao apre-sen-ta-das to-das as
+ []
 
-] (./Relatorio.aux)
+<TelaNaoConectado.png, id=187, 200.75pt x 68.255pt>
+File: TelaNaoConectado.png Graphic file (type png)
+<use TelaNaoConectado.png>
+Package pdftex.def Info: TelaNaoConectado.png  used on input line 291.
+(pdftex.def)             Requested size: 172.63203pt x 58.69919pt.
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
+<RespostasConexao.png, id=189, 312.16624pt x 87.82813pt>
+File: RespostasConexao.png Graphic file (type png)
+<use RespostasConexao.png>
+Package pdftex.def Info: RespostasConexao.png  used on input line 303.
+(pdftex.def)             Requested size: 194.20898pt x 54.64182pt.
+[4 <./TelaNaoConectado.png> <./RespostasConexao.png>] (./Relatorio.aux)
 Package rerunfilecheck Info: File `Relatorio.out' has not changed.
-(rerunfilecheck)             Checksum: 2C98EF816D3DEFD993262E433B52B9A0;716.
- ) 
+(rerunfilecheck)             Checksum: D927B3E9025ADE45B716D58438602FF5;1108.
+ )
+(\end occurred when \ifx on line 304 was incomplete)
+(\end occurred when \ifx on line 292 was incomplete) 
 Here is how much of TeX's memory you used:
- 22223 strings out of 476029
- 411984 string characters out of 5794164
- 1873340 words of memory out of 5000000
- 42280 multiletter control sequences out of 15000+600000
- 548731 words of font info for 96 fonts, out of 8000000 for 9000
+ 24648 strings out of 476029
+ 444084 string characters out of 5794164
+ 2249340 words of memory out of 5000000
+ 44518 multiletter control sequences out of 15000+600000
+ 551730 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,6n,80p,644b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (2 pages, 60664 bytes).
+ 84i,7n,80p,644b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Relatorio.pdf (4 pages, 148680 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 309 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
+ 171 named destinations out of 1000 (max. 500000)
+ 87 words of extra memory for PDF output out of 10000 (max. 10000000)
 

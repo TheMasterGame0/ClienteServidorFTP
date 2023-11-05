@@ -15,6 +15,20 @@ def fecharSocket(socket):
     receberMensagem(socket)
     socket.close()
 
+# Faz login no servidor
+def Login(socket, user, senha):
+    usuario = "user {u}\r\n".format(u = user)
+    comunicar(socket, usuario)       # Login
+    password = "pass {s}\r\n".format(s = senha)
+    comunicar(socket, password)      # Senha
+
+# Estabelece uma conexão com o servidor (com login) e configura
+def Conectar(Usuario, Senha):
+    socket = criarSocket(host, port)
+    Login(socket, Usuario, Senha)
+    comunicar(socket, "opts UTF8 ON\r\n")      # Configura o tipo de ASCII utilizado
+    return socket
+
 # Tenta enviar uma mensagem ao servidor
 def mandarMensagem(socket, mensagem):
     try:
@@ -48,20 +62,6 @@ def receberMensagem(socket):
 def comunicar(socket, mensagem):
     mandarMensagem(socket,mensagem)
     receberMensagem(socket)
-
-# Faz login no servidor
-def Login(socket, user, senha):
-    usuario = "user {u}\r\n".format(u = user)
-    comunicar(socket, usuario)       # Login
-    password = "pass {s}\r\n".format(s = senha)
-    comunicar(socket, password)      # Senha
-
-# Estabelece uma conexão com o servidor (com login) e configura
-def Conectar(Usuario, Senha):
-    socket = criarSocket(host, port)
-    Login(socket, Usuario, Senha)
-    comunicar(socket, "opts UTF8 ON\r\n")      # Configura o tipo de ASCII utilizado
-    return socket
 
 # Cria um caminho de dados para transferir os dados 
 def caminhoDeDados(socket):
@@ -103,6 +103,25 @@ def Download(socket, pathServidor, pathLocal):
     caminho.close()
     # Colocar o retorno que será utilizado pela tela
     # Criar o arquivo que será salvo com o caminho informado pela tela
+    criarArquivo(pathLocal, conteudo) 
+    return confirmacao
+
+# Salva o arquivo no path informado no Servidor no diretório atual
+# O path Local deve ser um path relativo para o servidor FTP compreender
+def Upload(socket, pathServidor, pathLocal):
+    caminho = caminhoDeDados(socket)
+    path = "".join(x+" " for x in pathServidor)
+    mensagem = "STOR "+path+final 
+    texto = mandarArquivo(caminho, pathLocal)   # Responsável por abrir o aquivo do sistema e mandá-lo pelo caminho de dados
+    mandarMensagem(socket, mensagem)
+    confirmacao = receberMensagem(socket)   # Resposta de confirmação da conexão
+    conteudo = receberMensagem(caminho)     # Conteúdo retornado
+    receberMensagem(socket)
+    caminho.close()    
+    return confirmacao
+
+# Criar o arquivo que será salvo com o caminho informado pela tela
+def criarArquivo(pathLocal, conteudo):
     try:
         if type(pathLocal) == type(["lista", "de", "teste"]):
             path = "".join(x+" " for x in pathLocal)
@@ -115,26 +134,28 @@ def Download(socket, pathServidor, pathLocal):
         print("O path fornecido tem problemas")
     except FileExistsError:
         print("Existe um arquivo com o mesmo nome fornecido")
-    
-    return confirmacao
 
-def Upload(socket, pathServidor, texto):
-    caminho = caminhoDeDados(socket)
-    tex = "".join(x+" " for x in texto)
-    tex = tex+"\r\n"
-    mandarMensagem(socket, tex)
-    receberMensagem(socket)
-    mensagem = "STOR "+pathServidor+final 
-    mandarMensagem(socket, mensagem)
-    confirmacao = receberMensagem(socket)   # Resposta de confirmação da conexão
-    conteudo = receberMensagem(caminho)     # Conteúdo retornado
-    receberMensagem(socket)
-    caminho.close()    
-    return confirmacao
+# Seleciona um arquivo do cliente 
+def mandarArquivo(socket, pathLocal):
+    try:
+        if type(pathLocal) == type(["lista", "de", "teste"]):
+            path = "".join(x+" " for x in pathLocal)
+            mandarMensagem(socket, lerArquivo(path))     # Manda o conteúdo do arquivo
+        else:
+            mandarMensagem(socket, lerArquivo(pathLocal))# Manda o conteúdo do arquivo
+    except FileNotFoundError:
+        print("O path fornecido tem problemas")
+    except FileExistsError:
+        print("Existe um arquivo com o mesmo nome fornecido")
 
-def criarArquivo(path):
-    pass
-############################################################################
+# Escreve texto em um arquivo
+def lerArquivo(pathLocal):
+    with open(pathLocal, "r") as f:
+        textoCompleto = f.readlines()
+        string = "".join([x for x in textoCompleto])
+        return string
+
+################### Constantes e Loop de testes ######################
 # Parâmetros universais para o código
 host = "127.0.0.1"  # IP do host utilizado
 port = 21           # Porta de acesso
@@ -156,7 +177,6 @@ final = "\r\n"
 #             Listar(socket, "")
 #         else:
 #             Listar(socket, msg)
-
 #     elif (entrada.split(" ")[0] == "Download"):
 #         if entrada != "Download":
 #             pathServidor = entrada.split(" ")[1]
@@ -164,15 +184,13 @@ final = "\r\n"
 #             Download(socket, pathServidor, pathLocal)
 #         else:
 #             print("Precisa dos paths")
-
 #     elif (entrada.split(" ")[0] == "Upload"):
 #         if entrada != "Upload":
-#             pathServidor = entrada.split(" ")[1]
-#             texto = entrada.split(" ")[2:]
-#             Upload(socket, pathServidor, texto)
+#             pathServidor = entrada.split(" ")[1:]
+#             pathLocal = input()
+#             Upload(socket, pathServidor, pathLocal)
 #         else:
 #             print("Precisa dos paths")
-
 #     else:
 #         msg = entrada + final
 #         comunicar(socket, msg)
