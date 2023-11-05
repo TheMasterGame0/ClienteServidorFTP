@@ -110,7 +110,7 @@ def Download(socket, pathServidor, pathLocal):
 # O path Local deve ser um path relativo para o servidor FTP compreender
 def Upload(socket, pathServidor, pathLocal):
     caminho = caminhoDeDados(socket)
-    path = "".join(x+" " for x in pathServidor)
+    path = "".join(x for x in pathServidor)
     mensagem = "STOR "+path+final 
     texto = mandarArquivo(caminho, pathLocal)   # Responsável por abrir o aquivo do sistema e mandá-lo pelo caminho de dados
     mandarMensagem(socket, mensagem)
@@ -128,7 +128,7 @@ def criarArquivo(pathLocal, conteudo):
             with open(file=path, mode = "x") as f:
                 f.write(conteudo)
         else:
-            with open(pathLocal, "x") as f:
+            with open(file=pathLocal, mode = "x") as f:
                 f.write(conteudo)
     except FileNotFoundError:
         print("O path fornecido tem problemas")
