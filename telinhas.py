@@ -83,6 +83,7 @@ def selecionarDl(socket):
         conteudo = conteudo.split()
         conteudo = [conteudo[i:i + 4] for i in range(0, len(conteudo), 4)]
 
+
         # Insere os itens na lista vazia
         for item in conteudo:
             listaConteudo.insert(END, item)
@@ -96,17 +97,32 @@ def selecionarDl(socket):
 def selecaoArquivo(listaConteudo, telaSelecao):
     # Determina e registra qual item foi selecionado pelo usuário
     arquivoSelecionado = False
+    tipoArquivo = ""
 
     for i in listaConteudo.curselection():
-        arquivoSelecionado = listaConteudo.get(i)[3]
-        tipoArquivo = listaConteudo.get(i)[2]
+        try:
+            itemTeste = listaConteudo.get(i)[0]
+            tipoArquivo = listaConteudo.get(i)[2]
+            arquivoSelecionado = listaConteudo.get(i)[3]
+        except:
+            itemTeste = listaConteudo.get(i)
 
         print(arquivoSelecionado)
 
-    if arquivoSelecionado:
+    if "../" in itemTeste:
+        print("voltemos!")
+        print(listaConteudo)
+        # for item in listaConteudo:
+        #     listaConteudo.insert(END, item)
+    elif arquivoSelecionado and tipoArquivo!="<DIR>": # Seleciona o arquivo na pasta atual
         textoInfo.set("Arquivo Selecionado,\nAguardando Download...")
         telaSelecao.destroy()
-    else:
+    elif arquivoSelecionado: # Caso seja uma pasta, navega para dentro do diretório
+        listaAnterior = listaConteudo
+        listaConteudo.delete(0,END)
+        listaConteudo.insert(END, "../") # Opção de voltar à pasta anterior
+        print("pastinha!")
+    else: # Se não selecionar nada e o botão for acionado, volta à telaMain e avisa o erro
         textoInfo.set("Nenhum Arquivo Selecionado!")
         telaSelecao.destroy()
 
