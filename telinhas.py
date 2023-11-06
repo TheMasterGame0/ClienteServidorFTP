@@ -1,9 +1,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
 from tkinter import filedialog
-# Coisas a fazer.
-# Fazer o menu de decidir onde baixar.
-# Arrumar o botão de enviar do Upload para apenas aparecer as pastas.
+# Coisas a fazer..
 # Fazer o botão para escolher a pasta. No botão:
 #   - Deve abrir uma tela para escolher o nome do arquivo
 #   - Deve apenas fechar a tela de busca.
@@ -50,15 +48,16 @@ def desconectaServidor(socket):
     bio.grid(column=1, row=0)
 
 def enviarArquivo(socket, pathLocal):
-    nomeArquivo = selecionar(socket, FALSE)
-    #Upload(socket, nomeArquivo,pathLocal)
-    textoInfo.set("Arquivo enviado\nAguardando ação...")
+    nomeArquivo = selecionar(socket, FALSE, pathLocal)
+    #Upload(socket, nomeArquivo, pathLocal)
+    textoInfo.set("Arquivo enviado!\nAguardando ação...")
 
 def baixarArquivo(socket, arquivoSelecionado):
-    textoInfo.set("Arquivo baixado\nAguardando ação...")
-    #Download(socket, arquivoSelecionado, "..\TextodeTeste.txt")
+    pastaSelecionada = filedialog.askdirectory(parent=telaMain, title="Selecionar Pasta",)
+    #Download(socket, arquivoSelecionado, pastaSelecionada)
+    textoInfo.set("Arquivo baixado!\nAguardando ação...")
 
-def selecionar(socket, mostrarTudo):
+def selecionar(socket, mostrarTudo, arquivo):
     #confirmacao, conteudo = Listar(socket, "")
 
     confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.","03-10-22  01:35AM 419965 Imagem.png\n11-04-23  12:45PM       <DIR>          Pasta\n11-03-23  02:20PM                   29 Teste.txt\n11-04-23  08:48PM                   65 Teste3.txt\n11-05-23  04:17PM                   42 Texto.txt"
@@ -87,8 +86,13 @@ def selecionar(socket, mostrarTudo):
             for item in conteudo:
                 listaConteudo.insert(END, item)
 
-            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao))
+            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo))
             btnSelecao.pack(anchor = "s")
+
+            btnPasta = Button(telaSelecao, text = "Selecionar Pasta")
+            btnPasta["state"] = "disabled"
+            btnPasta.pack(anchor = "s")
+
         else:
             # Insere os itens na lista vazia
             listaConteudo.insert(END, "../")
@@ -96,13 +100,41 @@ def selecionar(socket, mostrarTudo):
                 if item[2] == "<DIR>":
                     listaConteudo.insert(END, item)
 
-            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao))
+            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo))
             btnSelecao.pack(anchor = "s")
+
+            btnPasta = Button(telaSelecao, text="Selecionar Pasta", command = lambda: selecaoPasta(socket, listaConteudo, telaSelecao, arquivo))
+            btnPasta.pack(anchor="s")
 
     else:
         textoInfo.set("Erro") # Atualiza texto informativo para dizer que a conexao não foi estabelecida
 
-def selecaoArquivo(socket, listaConteudo, telaSelecao):
+def selecaoPasta(socket, listaConteudo, telaSelecao, arquivo):
+    pastaPath = "\\"
+    for i in listaConteudo.curselection():
+        try:
+            pastaPath = listaConteudo.get(i)[3] + "\\"
+        except:
+            pass
+
+    telaNome = Toplevel(telaSelecao)
+    telaNome.geometry("400x70")
+    telaNome.title("Dê um nome a seu arquivo:")
+    telaNome.resizable(0, 0)
+
+    campoNome = Text(telaNome)
+    campoNome.place(x = 5, y = 5, height = 20, width = 390)
+
+    btnNome = Button(telaNome, text="Salvar", command= lambda: salvarNome(socket, campoNome, pastaPath, arquivo, telaSelecao))
+    btnNome.place(x = 170, y = 35, height = 25, width = 60)
+
+def salvarNome(socket, campoNome, pastaPath, arquivo, telaSelecao):
+    caminho = pastaPath + campoNome.get("1.0", 'end-1c') + ".txt"
+    telaSelecao.destroy()
+    campoNome.destroy()
+    #Upload(socket, caminho, arquivo)
+
+def selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo):
     # Determina e registra qual item foi selecionado pelo usuário
 
     # Criar um botão que permita selecionar uma pasta para quando o mostrarTudo for Falso. Criar uma tela nesse botão para escolher o nome do arquivo.
@@ -119,11 +151,7 @@ def selecaoArquivo(socket, listaConteudo, telaSelecao):
         except:
             itemTeste = listaConteudo.get(i)
 
-        print(arquivoSelecionado)
-
-
     if "../" in itemTeste:
-        print("voltemos!")
         listaConteudo.delete(0,END)
         listaConteudo.insert(END, "../") # Opção de voltar à pasta anterior
         # confirmacao, conteudo = Listar(socket,"..\\")
@@ -134,8 +162,18 @@ def selecaoArquivo(socket, listaConteudo, telaSelecao):
             conteudo = conteudo.split()
             conteudo = [conteudo[i:i + 4] for i in range(0, len(conteudo), 4)]
 
-            for item in conteudo:
-                listaConteudo.insert(END, item)
+            if mostrarTudo:
+                # Insere os itens na lista vazia
+                for item in conteudo:
+                    listaConteudo.insert(END, item)
+            else:
+                # Insere os itens na lista vazia
+                for item in conteudo:
+                    if item[2] == "<DIR>":
+                        listaConteudo.insert(END, item)
+        else:
+            textoInfo.set("Erro")  # Atualiza texto informativo para dizer que a conexao não foi estabelecida
+
     elif arquivoSelecionado and tipoArquivo!="<DIR>": 
     # Seleciona o arquivo na pasta atual
         textoInfo.set("Arquivo Selecionado,\nAguardando Download...")
@@ -144,6 +182,7 @@ def selecaoArquivo(socket, listaConteudo, telaSelecao):
         btnBaixarDl.grid(column=2, row=4)
 
         telaSelecao.destroy()
+
     elif arquivoSelecionado: # Caso seja uma pasta, navega para dentro do diretório
         listaConteudo.delete(0,END)
         listaConteudo.insert(END, "../") # Opção de voltar à pasta anterior
@@ -156,11 +195,18 @@ def selecaoArquivo(socket, listaConteudo, telaSelecao):
             conteudo = conteudo.split()
             conteudo = [conteudo[i:i + 4] for i in range(0, len(conteudo), 4)]
 
-            for item in conteudo:
-                listaConteudo.insert(END, item)
+            if mostrarTudo:
+                # Insere os itens na lista vazia
+                for item in conteudo:
+                    listaConteudo.insert(END, item)
+            else:
+                # Insere os itens na lista vazia
+                for item in conteudo:
+                    if item[2] == "<DIR>":
+                        listaConteudo.insert(END, item)
+        else:
+            textoInfo.set("Erro")  # Atualiza texto informativo para dizer que a conexao não foi estabelecida
 
-
-        print("pastinha!")
     else: # Se não selecionar nada e o botão for acionado, volta à telaMain e avisa o erro
         textoInfo.set("Nenhum Arquivo Selecionado!")
         telaSelecao.destroy()
@@ -171,20 +217,17 @@ def selecionarUp(socket):
     try:
         # Problema: Arquivos que não são PNGs, TXTs ou PDFs não provocam reação nenhuma.
 
-        telaMain.filename = filedialog.askopenfilename(initialdir="/Users/PC/Downloads", title="Selecionar Imagem",
-                                                       filetypes=(("All files", "*.*"), ("TXT files", "*.txt")))
+        telaMain.filename = filedialog.askopenfilename(title="Selecionar Imagem", filetypes=(("All files", "*.*"), ("TXT files", "*.txt")))
         tipoArquivo = telaMain.filename.split('.', 1)[1] # Determina o tipo de extensão do arquivo selecionado
 
         match tipoArquivo: # Casos de tipo de arquivo: Decide qual ícone será mostrado na tela
             case "png": # Mostra a imagem selecionada
-                print("Imagem!")
                 imgAjustada = Image.open(telaMain.filename).resize((200, 200))
                 img = ImageTk.PhotoImage(imgAjustada)
                 imgLabel = Label(image=img)
                 imgLabel.grid(column=1, row=2)
                 textoInfo.set("Imagem Selecionada,\nAguardando Upload...")
             case "txt": # Mostra o icone de TXT
-                print("Texto!")
                 # iconeAjustado = Image.open("Recursos\\iconeTXT.png").resize((200, 200))
                 # icone = ImageTk.PhotoImage(iconeAjustado)
                 # imgLabel = Label(image=icone)
@@ -194,11 +237,11 @@ def selecionarUp(socket):
                 textoInfo.set("Arquivo Inválido!")
 
         # Cria o botão de enviar.
-        btnEnviarUp = Button(telaMain, text="Enviar", command= lambda: enviarArquivo(socket,telaMain.filename))
+        btnEnviarUp = Button(telaMain, text="Enviar", command= lambda: enviarArquivo(socket, telaMain.filename))
         btnEnviarUp.grid(column=0, row=4)
 
     except:
-        print("Nenhuma imagem selecionada ou erro na seleção!")
+        textoInfo.set("Nenhum Arquivo Selecionado!")
 
 
 def iniciarBotoes(socket):
@@ -207,15 +250,15 @@ def iniciarBotoes(socket):
     acao = Label(telaMain,textvariable = textoInfo) # Texto informando a ação tomada
     acao.grid(column=1, row=4)
 
-    bio = Label(telaMain,text = "Upload")
-    bio.grid(column=0, row=3)
+    bioUp = Label(telaMain,text = "Upload")
+    bioUp.grid(column=0, row=3)
 
-    bio = Label(telaMain,text = "Download")
-    bio.grid(column=2, row=3)
+    bioDl = Label(telaMain,text = "Download")
+    bioDl.grid(column=2, row=3)
 
 ############ Botões ############    
     # Botões de download
-    btnSelecionar = Button(telaMain, text="Selecionar", command= lambda: selecionar(socket, TRUE)) 
+    btnSelecionar = Button(telaMain, text="Selecionar", command= lambda: selecionar(socket, TRUE, False))
 
     # Botões de upload
     btnAbrirUp = Button(telaMain, text="Abrir", command=lambda: selecionarUp(socket))
