@@ -1,15 +1,17 @@
 # Fdb version 4
-["pdflatex"] 1699231491 "c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex" "Relatorio.pdf" "Relatorio" 1699231494 0
+["pdflatex"] 1699305776 "c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex" "Relatorio.pdf" "Relatorio" 1699305780 0
+  "Captura.png" 1699240598 82081 b85f93a846f1f24755bbaefcc77b85af ""
+  "Dados do Store.png" 1699241572 30666 cd7e2badf297ec9b328c5fc953ae1d52 ""
   "IEEEtran.cls" 1698417743 191754 c81dd8008322d38e302aca49b92fe004 ""
-  "Relatorio.aux" 1699231494 2706 8867f75fa172dd996dee003f5fe72935 "pdflatex"
-  "Relatorio.out" 1699231494 1108 d927b3e9025ade45b716d58438602ff5 "pdflatex"
-  "Relatorio.tex" 1699231490 17390 28c191d23fdb4e471bf1812e36d2f3d6 ""
+  "Relatorio.aux" 1699305780 3099 3a496b1f96232cddcdda446e1264c961 "pdflatex"
+  "Relatorio.out" 1699305780 1108 d927b3e9025ade45b716d58438602ff5 "pdflatex"
+  "Relatorio.tex" 1699305775 20980 04dd1363b291ed4d53b3fd7a5f4d9d8e ""
   "RespostasConexao.png" 1699158965 13926 5650195e24c2bc6dea0355f4471e63dc ""
   "SelecionarArquivo.png" 1699224141 148698 9da01de20315ef307cd2cdb45291a0a9 ""
   "TelaConectada.png" 1699223825 30196 6bc9e6335710cd65e8754437bb63e45f ""
   "TelaNaoConectado.png" 1699156519 22170 1d3f2e4afc17c22c7a53e2fc218e64d6 ""
   "c:/Users/Gabriel" 1697910721 17816 51e0cecb1ce07e4394af3552a088f815 ""
-  "c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex" 1699231490 17390 28c191d23fdb4e471bf1812e36d2f3d6 ""
+  "c:/Users/Gabriel Henrique/Documents/UNB/Semestre 4/Redes de Computadores/Trabalho/Projeto 1/ImplementacaoFTP/Relatorio/Relatorio.tex" 1699305775 20980 04dd1363b291ed4d53b3fd7a5f4d9d8e ""
   "c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1677082332 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1677085283 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2022/texmf-dist/fonts/tfm/adobe/courier/pcrb7t.tfm" 1677040014 960 4ab65358b8406f30ef5496c8c096d22b ""

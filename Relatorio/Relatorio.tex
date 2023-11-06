@@ -45,7 +45,7 @@
 \maketitle
 
 \begin{abstract}
-   O presente relatório visa 
+   O presente relatório visa explicar o processo de criação de um programa que efetua uma conexão Servidor-Cliente, e possibilita o envio e download de arquivos de texto, contando com uma interface interativa para um possível usuário. Ao decorrer do desenvolvimento, foram usados os conceitos de protocolos, servidores, camadas de rede, análise de pacotes, caminho de dados, entre outros. 
 \end{abstract}
 
 % \begin{keywords}
@@ -53,7 +53,7 @@
 % \end{keywords}
 
 
- \textbf{\textit{Palavras-chave — }FTP, Servidor, Python.} 
+ \textbf{\textit{Palavras-chave — }FTP, Servidor, Python, Wireshark.} 
 
 \section{Introdução}
 % Contextualização do tema do trabalho dentro da disciplina e da área de redes de computadores. Descrição da estruturação do relatório.
@@ -325,20 +325,44 @@ Para iniciar o processo de upload, basta o usuário clicar no botão "Abrir" e i
 
 Tendo armazenado o endereço do arquivo no computador do cliente e o socket de comunicação já criado, o botão de enviar arquivo pode ser selecionado para determinar em que pasta do servidor deve ser colocado o arquivo desejado e o nome do arquivo.
 
-%Colocar a seleção de pasta
+Neste ponto, é iniciada a comunicação efetiva entre cliente e servidor. Utilizando a função "Upload" criada no cliente é iniciada a comunicação. Um novo caminho de dados será aberto, para isso será enviado um comando "PASV" ao servidor, o qual deverá retornar o IP e uma porta de acesso ao cliente. 
 
-Neste ponto, é iniciada a comunicação efetiva entre cliente e servidor. Utilizando a função "Upload" criada no cliente é iniciada a comunicação. Um novo caminho de dados será aberto, para isso será enviado um comando "PASV" ao servidor
+Com a nova porta informada um novo socket é iniciado com o servidor para servir de caminho de dados. Com o caminho de dados aberto, os dados do arquivo são enviados por ele e em seguida o comando "STOR" é enviado ao servidor pelo socket inicial. Com isso, o servidor é capaz de compreender que deve salvar os dados enviados no formato de texto indicado por padrão.
 
-
+Tendo recebido corretamente todos os dados, uma resposta é retornada ao cliente e o caminho de dados é fechado. Sendo assim, o processo de envio de dados ao servidor está finalizado.
 
 \subsection{\textit{WireShark}}
+Para analisar o funcionamento do cliente, o segundo cenário apresentado nos exemplos de funcionamento do cliente foi utilizado como base. Para a análise, foi observado o seguinte trecho da captura.
 
+\begin{figure}[h]
+   \centering
+   \includegraphics[width = 0.8\linewidth]{Captura.png}  
+   \caption{Trecho da captura}
+   \label{fig:Captura}
+\end{figure}
 
+Analisando o que foi obtido, os IPs do cliente e servidor são os mesmos, visto que foi utilizada a rede local para hospedar o servidor durante os testes. A diferença que é observada ao longo das mensagens são as portas de saída e chegada de cada uma delas.
 
+Para demonstrar o bom funcionamento do cliente, pode ser observada a criação da conexão passiva e a transmissão de dados ao servidor para ser realizado um "\textit{store}". Inicialmente, são trocadas mensagens, de maneira alternada, do tipo FTP e TCP entre os dois para estabelecer a conexão passiva, a qual é confirmada com a criação do socket que é percebida por três trocas TCP entre Servidor e Cliente (\textit{HandShaking}).
 
+Partindo disso, os dados que querem ser salvos são transmitidos ao servidor pelo caminho de dados e podem ser observados a baixo:
+
+\begin{figure}[h]
+   \centering
+   \includegraphics[width = 0.9\linewidth]{Dados do Store.png}  
+   \caption{Dados para serem salvos.}
+   \label{fig:Captura}
+\end{figure}
+
+Nesta mesma parte, pode ser observado como o arquivo do tipo texto que foi transmitido foi convertido para uma representação Hexadecimal, que na prática foi transmitida de forma binária, o que também representa o encapsulamento dos dados transmitidos.
+
+No restante das linhas obtidas, a conexão é retratada como um sucesso e o socket do caminho de dados é encerrado, finalizando todas as operações propostas pelo cliente. Sendo assim, o funcionamento do cliente é como o esperado.
+
+Para demonstrar o funcionamento, o grupo realizou a gravação de um vídeo de apresentação do projeto, o qual está disponível no link: \href{https://clipchamp.com/watch/nFDDmon84ZO}{https://clipchamp.com/watch/nFDDmon84ZO}. Da mesma forma o código pode ser encontrado no \textbf{GitHub} em: \href{https://github.com/TheMasterGame0/ImplementacaoFTP}{https://github.com/TheMasterGame0/Implement acaoFTP}.
 
 \section{Conclusões}
 % Deve ter entre 5 e 10 linhas resumindo as conclusões obtidas com o trabalho.
+Baseado no que foi observado ao longo do estudo, é possível concluir que é possível estabelecer uma conexão entre um cliente simples e um servidor capaz de cumprir com seus objetivos básicos. O caminho e comportamento dos dados trocados também podem ser rastreados e analisados para fins didáticos com as ferramentas certas.
  
 % Verificar a formatação das referências
 \begin{thebibliography}{10}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  5 NOV 2023 21:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  6 NOV 2023 18:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -631,6 +631,9 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 
 LaTeX Warning: Label `fig:Tela inicial Conectada' multiply defined.
 
+
+LaTeX Warning: Label `fig:Captura' multiply defined.
+
 )
 \openout1 = `Relatorio.aux'.
 
@@ -757,26 +760,26 @@ Underfull \hbox (badness 1983) in paragraph at lines 283--284
 []\OT1/ptm/m/n/11 Dessa forma, s[]ao apre-sen-ta-das to-das as
  []
 
-<TelaNaoConectado.png, id=187, 200.75pt x 68.255pt>
+<TelaNaoConectado.png, id=178, 200.75pt x 68.255pt>
 File: TelaNaoConectado.png Graphic file (type png)
 <use TelaNaoConectado.png>
 Package pdftex.def Info: TelaNaoConectado.png  used on input line 291.
 (pdftex.def)             Requested size: 172.63203pt x 58.69919pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<RespostasConexao.png, id=189, 312.16624pt x 87.82813pt>
+<RespostasConexao.png, id=180, 312.16624pt x 87.82813pt>
 File: RespostasConexao.png Graphic file (type png)
 <use RespostasConexao.png>
 Package pdftex.def Info: RespostasConexao.png  used on input line 303.
 (pdftex.def)             Requested size: 194.20898pt x 54.64182pt.
-<TelaConectada.png, id=190, 283.0575pt x 117.94063pt>
+<TelaConectada.png, id=181, 283.0575pt x 117.94063pt>
 File: TelaConectada.png Graphic file (type png)
 <use TelaConectada.png>
 Package pdftex.def Info: TelaConectada.png  used on input line 312.
 (pdftex.def)             Requested size: 172.63203pt x 71.93106pt.
-[4 <./TelaNaoConectado.png> <./RespostasConexao.png> <./TelaConectada.png>]
-<SelecionarArquivo.png, id=231, 464.23438pt x 338.76563pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4 <./TelaNaoConectado.png> <./RespostasConexao.png>]
+<SelecionarArquivo.png, id=229, 464.23438pt x 338.76563pt>
 File: SelecionarArquivo.png Graphic file (type png)
 <use SelecionarArquivo.png>
 Package pdftex.def Info: SelecionarArquivo.png  used on input line 321.
@@ -787,36 +790,67 @@ Underfull \hbox (badness 3078) in paragraph at lines 326--327
  []
 
 
-Underfull \hbox (badness 2913) in paragraph at lines 330--331
+Underfull \hbox (badness 2913) in paragraph at lines 328--329
 []\OT1/ptm/m/n/11 Neste ponto, []e ini-ci-ada a comunica[][]ao
  []
 
-[5
+<Captura.png, id=230, 452.18938pt x 307.64937pt>
+File: Captura.png Graphic file (type png)
+<use Captura.png>
+Package pdftex.def Info: Captura.png  used on input line 339.
+(pdftex.def)             Requested size: 172.63203pt x 117.44781pt.
+[5 <./TelaConectada.png> <./SelecionarArquivo.png> <./Captura.png>]
+<Dados do Store.png, id=241, 501.875pt x 108.90688pt>
+File: Dados do Store.png Graphic file (type png)
+<use Dados do Store.png>
+Package pdftex.def Info: Dados do Store.png  used on input line 352.
+(pdftex.def)             Requested size: 194.20898pt x 42.14445pt.
 
- <./SelecionarArquivo.png>] (./Relatorio.aux)
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
+[]\OT1/ptm/m/n/11 https://clipchamp.com/watch/nFDDmon84ZO[].
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
+\OT1/ptm/m/n/11 Da mesma forma o c[]odigo pode
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
+\OT1/ptm/m/n/11 ser en-con-trado no \OT1/ptm/b/n/11 GitHub \OT1/ptm/m/n/11 em:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
+[]\OT1/ptm/m/n/11 https://github.com/TheMasterGame0/Implement
+ []
+
+[6 <./Dados do Store.png>] (./Relatorio.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: D927B3E9025ADE45B716D58438602FF5;1108.
  )
+(\end occurred when \ifx on line 353 was incomplete)
+(\end occurred when \ifx on line 340 was incomplete)
 (\end occurred when \ifx on line 322 was incomplete)
 (\end occurred when \ifx on line 313 was incomplete)
 (\end occurred when \ifx on line 304 was incomplete)
 (\end occurred when \ifx on line 292 was incomplete) 
 Here is how much of TeX's memory you used:
- 24673 strings out of 476029
- 444553 string characters out of 5794164
- 2249340 words of memory out of 5000000
- 44537 multiletter control sequences out of 15000+600000
+ 24695 strings out of 476029
+ 444925 string characters out of 5794164
+ 2260340 words of memory out of 5000000
+ 44554 multiletter control sequences out of 15000+600000
  551730 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,7n,80p,644b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (5 pages, 288802 bytes).
+Output written on Relatorio.pdf (6 pages, 358254 bytes).
 PDF statistics:
- 323 PDF objects out of 1000 (max. 8388607)
- 289 compressed objects within 3 object streams
- 175 named destinations out of 1000 (max. 500000)
- 97 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 336 PDF objects out of 1000 (max. 8388607)
+ 297 compressed objects within 3 object streams
+ 178 named destinations out of 1000 (max. 500000)
+ 107 words of extra memory for PDF output out of 10000 (max. 10000000)
 
