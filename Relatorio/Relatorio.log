@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  5 NOV 2023 02:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.23)  5 NOV 2023 21:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -627,7 +627,11 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count331
 \l__pdf_internal_box=\box114
-) (./Relatorio.aux)
+) (./Relatorio.aux
+
+LaTeX Warning: Label `fig:Tela inicial Conectada' multiply defined.
+
+)
 \openout1 = `Relatorio.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -766,25 +770,53 @@ File: RespostasConexao.png Graphic file (type png)
 <use RespostasConexao.png>
 Package pdftex.def Info: RespostasConexao.png  used on input line 303.
 (pdftex.def)             Requested size: 194.20898pt x 54.64182pt.
-[4 <./TelaNaoConectado.png> <./RespostasConexao.png>] (./Relatorio.aux)
+<TelaConectada.png, id=190, 283.0575pt x 117.94063pt>
+File: TelaConectada.png Graphic file (type png)
+<use TelaConectada.png>
+Package pdftex.def Info: TelaConectada.png  used on input line 312.
+(pdftex.def)             Requested size: 172.63203pt x 71.93106pt.
+[4 <./TelaNaoConectado.png> <./RespostasConexao.png> <./TelaConectada.png>]
+<SelecionarArquivo.png, id=231, 464.23438pt x 338.76563pt>
+File: SelecionarArquivo.png Graphic file (type png)
+<use SelecionarArquivo.png>
+Package pdftex.def Info: SelecionarArquivo.png  used on input line 321.
+(pdftex.def)             Requested size: 172.63203pt x 125.97711pt.
+
+Underfull \hbox (badness 3078) in paragraph at lines 326--327
+\OT1/ptm/m/n/11 no com-pu-ta-dor do cli-ente e o soc-ket de
+ []
+
+
+Underfull \hbox (badness 2913) in paragraph at lines 330--331
+[]\OT1/ptm/m/n/11 Neste ponto, []e ini-ci-ada a comunica[][]ao
+ []
+
+[5
+
+ <./SelecionarArquivo.png>] (./Relatorio.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `Relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: D927B3E9025ADE45B716D58438602FF5;1108.
  )
+(\end occurred when \ifx on line 322 was incomplete)
+(\end occurred when \ifx on line 313 was incomplete)
 (\end occurred when \ifx on line 304 was incomplete)
 (\end occurred when \ifx on line 292 was incomplete) 
 Here is how much of TeX's memory you used:
- 24648 strings out of 476029
- 444084 string characters out of 5794164
+ 24673 strings out of 476029
+ 444553 string characters out of 5794164
  2249340 words of memory out of 5000000
- 44518 multiletter control sequences out of 15000+600000
+ 44537 multiletter control sequences out of 15000+600000
  551730 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,7n,80p,644b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (4 pages, 148680 bytes).
+Output written on Relatorio.pdf (5 pages, 288802 bytes).
 PDF statistics:
- 309 PDF objects out of 1000 (max. 8388607)
- 280 compressed objects within 3 object streams
- 171 named destinations out of 1000 (max. 500000)
- 87 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 323 PDF objects out of 1000 (max. 8388607)
+ 289 compressed objects within 3 object streams
+ 175 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

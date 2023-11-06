@@ -15,8 +15,7 @@ from Cliente import *
 def conectarServidor():
     try: 
         status = "Online"
-        #socket = Conectar(user, senha)
-        socket = 0
+        socket = Conectar(user, senha)
 
         # Botão para desconectar o servidor
         global btnDesconectar;
@@ -48,19 +47,16 @@ def desconectaServidor(socket):
     bio.grid(column=1, row=0)
 
 def enviarArquivo(socket, pathLocal):
-    nomeArquivo = selecionar(socket, FALSE, pathLocal)
-    #Upload(socket, nomeArquivo, pathLocal)
+    selecionar(socket, FALSE, pathLocal)
     textoInfo.set("Arquivo enviado!\nAguardando ação...")
 
 def baixarArquivo(socket, arquivoSelecionado):
-    pastaSelecionada = filedialog.askdirectory(parent=telaMain, title="Selecionar Pasta",)
-    #Download(socket, arquivoSelecionado, pastaSelecionada)
+    pastaSelecionada = filedialog.askdirectory(parent=telaMain, title="Selecionar Pasta")
+    Download(socket, arquivoSelecionado, pastaSelecionada+"/"+arquivoSelecionado.split("/")[-1])
     textoInfo.set("Arquivo baixado!\nAguardando ação...")
 
 def selecionar(socket, mostrarTudo, arquivo):
-    #confirmacao, conteudo = Listar(socket, "")
-
-    confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.","03-10-22  01:35AM 419965 Imagem.png\n11-04-23  12:45PM       <DIR>          Pasta\n11-03-23  02:20PM                   29 Teste.txt\n11-04-23  08:48PM                   65 Teste3.txt\n11-05-23  04:17PM                   42 Texto.txt"
+    confirmacao, conteudo = Listar(socket, "")
 
     global textoinfo
     
@@ -86,13 +82,15 @@ def selecionar(socket, mostrarTudo, arquivo):
             for item in conteudo:
                 listaConteudo.insert(END, item)
 
-            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo))
+            arquivoSelecionado = [""]
+
+            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo, False, arquivoSelecionado, btnPasta))
             btnSelecao.pack(anchor = "s")
 
             btnPasta = Button(telaSelecao, text = "Selecionar Pasta")
             btnPasta["state"] = "disabled"
             btnPasta.pack(anchor = "s")
-
+            
         else:
             # Insere os itens na lista vazia
             listaConteudo.insert(END, "../")
@@ -100,17 +98,18 @@ def selecionar(socket, mostrarTudo, arquivo):
                 if item[2] == "<DIR>":
                     listaConteudo.insert(END, item)
 
-            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda: selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo))
+            arquivoSelecionado = [""]
+            btnSelecao = Button(telaSelecao, text = "Selecionar", command = lambda:
+            selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo, arquivo, arquivoSelecionado, btnPasta))
             btnSelecao.pack(anchor = "s")
 
-            btnPasta = Button(telaSelecao, text="Selecionar Pasta", command = lambda: selecaoPasta(socket, listaConteudo, telaSelecao, arquivo))
+            btnPasta = Button(telaSelecao, text="Selecionar Pasta", command = lambda: selecaoPasta(socket, listaConteudo, telaSelecao, arquivo, ""))
             btnPasta.pack(anchor="s")
 
     else:
         textoInfo.set("Erro") # Atualiza texto informativo para dizer que a conexao não foi estabelecida
 
-def selecaoPasta(socket, listaConteudo, telaSelecao, arquivo):
-    pastaPath = "\\"
+def selecaoPasta(socket, listaConteudo, telaSelecao, arquivo, pastaPath):
     for i in listaConteudo.curselection():
         try:
             pastaPath = listaConteudo.get(i)[3] + "\\"
@@ -129,34 +128,36 @@ def selecaoPasta(socket, listaConteudo, telaSelecao, arquivo):
     btnNome.place(x = 170, y = 35, height = 25, width = 60)
 
 def salvarNome(socket, campoNome, pastaPath, arquivo, telaSelecao):
-    caminho = pastaPath + campoNome.get("1.0", 'end-1c') + ".txt"
+    caminho = pastaPath+ "\\" + campoNome.get("1.0", 'end-1c') + ".txt"
     telaSelecao.destroy()
     campoNome.destroy()
-    #Upload(socket, caminho, arquivo)
+    Upload(socket, caminho, arquivo)
 
-def selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo):
+def selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo, arquivo, arquivoSelecionado, btnPasta):
     # Determina e registra qual item foi selecionado pelo usuário
 
     # Criar um botão que permita selecionar uma pasta para quando o mostrarTudo for Falso. Criar uma tela nesse botão para escolher o nome do arquivo.
-    arquivoSelecionado = False
     tipoArquivo = ""
     itemTeste = ""
+
+    if arquivo != False:
+        btnPasta.destroy()
+        btnPasta = Button(telaSelecao, text="Selecionar Pasta", command = lambda: selecaoPasta(socket, listaConteudo, telaSelecao, arquivo, arquivoSelecionado[0]))
+        btnPasta.pack(anchor="s")
 
     for i in listaConteudo.curselection():
         try:
             itemTeste = listaConteudo.get(i)[0]
             tipoArquivo = listaConteudo.get(i)[2]
-            arquivoSelecionado = listaConteudo.get(i)[3]
+            arquivoSelecionado[0] = arquivoSelecionado[0] + "/" + listaConteudo.get(i)[3]
 
         except:
             itemTeste = listaConteudo.get(i)
 
-    if "../" in itemTeste:
+    if "..\\" in itemTeste:
         listaConteudo.delete(0,END)
-        listaConteudo.insert(END, "../") # Opção de voltar à pasta anterior
-        # confirmacao, conteudo = Listar(socket,"..\\")
-        confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.","03-10-22  01:35AM 419965 Imagem.png\n11-04-23  12:45PM       <DIR>          Pasta\n11-03-23  02:20PM                   29 Teste.txt\n11-04-23  08:48PM                   65 Teste3.txt\n11-05-23  04:17PM                   42 Texto.txt"
-
+        listaConteudo.insert(END, "..\\") # Opção de voltar à pasta anterior
+        confirmacao, conteudo = Listar(socket,"..\\")
 
         if "transfer complete" in confirmacao.lower():
             conteudo = conteudo.split()
@@ -174,22 +175,21 @@ def selecaoArquivo(socket, listaConteudo, telaSelecao, mostrarTudo):
         else:
             textoInfo.set("Erro")  # Atualiza texto informativo para dizer que a conexao não foi estabelecida
 
-    elif arquivoSelecionado and tipoArquivo!="<DIR>": 
+    elif arquivoSelecionado[0] and tipoArquivo!="<DIR>": 
     # Seleciona o arquivo na pasta atual
         textoInfo.set("Arquivo Selecionado,\nAguardando Download...")
         # Cria o botão para baixar
-        btnBaixarDl = Button(telaMain, text="Baixar", command= lambda: baixarArquivo(socket, arquivoSelecionado))
+        btnBaixarDl = Button(telaMain, text="Baixar", command= lambda: baixarArquivo(socket, arquivoSelecionado[0]))
         btnBaixarDl.grid(column=2, row=4)
 
         telaSelecao.destroy()
 
-    elif arquivoSelecionado: # Caso seja uma pasta, navega para dentro do diretório
+    elif arquivoSelecionado[0]: # Caso seja uma pasta, navega para dentro do diretório
         listaConteudo.delete(0,END)
-        listaConteudo.insert(END, "../") # Opção de voltar à pasta anterior
+        listaConteudo.insert(END, "..\\") # Opção de voltar à pasta anterior
 
         # Pega pelo Cliente os valores da pasta
-        confirmacao, conteudo = "125 Data connection already open; Transfer starting.\n226 Transfer complete.","11-02-23  10:23PM                   53 OutroArquivo.txt"
-        #confirmacao, conteudo = Listar(socket,"\\"+arquivoSelecionado)
+        confirmacao, conteudo = Listar(socket,arquivoSelecionado[0])
 
         if "transfer complete" in confirmacao.lower():
             conteudo = conteudo.split()

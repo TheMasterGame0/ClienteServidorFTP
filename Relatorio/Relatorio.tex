@@ -307,7 +307,36 @@ O usuário do login é enviado ao servidor, e a resposta obtida é o pedido de u
 
 O segundo processo que pode ser observado é feito após a conexão com o servidor. Como inicialmente o servidor se encontrará vazio, o cliente desejará transferir algum arquivo ao servidor. Partindo dessa ideia, o processo pode ser descrito abstraindo a parte referente a conexão com o servidor. 
 
+\begin{figure}[h]
+   \centering
+   \includegraphics[width = 0.8\linewidth]{TelaConectada.png}  
+   \caption{Tela com o servidor conectado.}
+   \label{fig:Tela inicial Conectada}
+\end{figure}
+
+Para iniciar o processo de upload, basta o usuário clicar no botão "Abrir" e irá ser solicitado o arquivo desejado no sistema. Neste ponto são iniciadas as preparações para as comunicações Cliente-Servidor.
+
+\begin{figure}[h]
+   \centering
+   \includegraphics[width = 0.8\linewidth]{SelecionarArquivo.png}  
+   \caption{Após clicar no botão, pode ser escolhido o arquivo desejado.}
+   \label{fig:Tela inicial Conectada}
+\end{figure}
+
+Tendo armazenado o endereço do arquivo no computador do cliente e o socket de comunicação já criado, o botão de enviar arquivo pode ser selecionado para determinar em que pasta do servidor deve ser colocado o arquivo desejado e o nome do arquivo.
+
+%Colocar a seleção de pasta
+
+Neste ponto, é iniciada a comunicação efetiva entre cliente e servidor. Utilizando a função "Upload" criada no cliente é iniciada a comunicação. Um novo caminho de dados será aberto, para isso será enviado um comando "PASV" ao servidor
+
+
+
 \subsection{\textit{WireShark}}
+
+
+
+
+
 \section{Conclusões}
 % Deve ter entre 5 e 10 linhas resumindo as conclusões obtidas com o trabalho.
  
@@ -317,6 +346,7 @@ O segundo processo que pode ser observado é feito após a conexão com o servid
    \bibitem[2]{socket}{socket — Low-level networking interface, \href{https://docs.python.org/3/library/socket.html}{https://docs .python.org/3/library/socket.html}}
    \bibitem[3]{FTP}{J. Postel, J. Reynolds. \textit{FILE TRANSFER PROTOCOL}, \href{https://www.rfc-editor.org/rfc/rfc959}{https://www.rfc-editor.org/rfc/rfc959}}
    \bibitem[4]{Comandos FTP}{J. Klensin, A. Hoenes. \textit{FTP Command and Extension Registry}, \href{https://www.rfc-editor.org/rfc/rfc5797}{https://www.rfc-editor.org/rfc/rfc5797}}
+   \bibitem[5]{d}{Wireshark User's Guide, \href{https://www.wireshark.org/docs/wsug\_html\_chunked/}{https://www.wireshark.org/ docs/wsug\_html\_chunked/}}
 \end{thebibliography}
 
 

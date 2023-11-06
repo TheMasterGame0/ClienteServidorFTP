@@ -125,10 +125,10 @@ def criarArquivo(pathLocal, conteudo):
     try:
         if type(pathLocal) == type(["lista", "de", "teste"]):
             path = "".join(x+" " for x in pathLocal)
-            with open(file=path, mode = "x") as f:
+            with open(path, "x") as f:
                 f.write(conteudo)
         else:
-            with open(file=pathLocal, mode = "x") as f:
+            with open(pathLocal, "x") as f:
                 f.write(conteudo)
     except FileNotFoundError:
         print("O path fornecido tem problemas")
